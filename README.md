@@ -1,5 +1,6 @@
 # WARBL Scala Fingering Laboratory
 
+![WARBL Scala Fingering Laboratory](docs/images/warbl-scala-fingering-laboratory-banner.png)
 A browser-based laboratory for loading **Scala tunings**, designing and testing **WARBL / WARBL2 fingering maps**, auditioning exact microtonal pitch, and preparing a validated **256-state custom chart** for installation on WARBL2.
 
 > **Current public candidate:** `v1.0.0-rc.1`  
