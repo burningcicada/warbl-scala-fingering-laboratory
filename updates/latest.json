@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "project": "WARBL Scala Fingering Laboratory",
+  "channel": "rc",
+  "version": "1.0.0-rc.1",
+  "status": "software-verified-release-candidate",
+  "published_date": "2026-08-27",
+  "application": "WARBL_Scala_Fingering_Lab_v1_0_0_rc_1.html",
+  "application_sha256": "9d77a5a93cfa3d493a9ffdbd73b08a255e6d0a117e676760952f94f7253bc79c",
+  "release_asset": "WARBL_Scala_Fingering_Lab_v1_0_0_rc_1_RELEASE_CANDIDATE.zip",
+  "release_asset_sha256": "e0b95a259b82cf75ac6c97ce4bebc71fe3d12ef73697cf89f4fc4dd96de4a901",
+  "github_release_url": null,
+  "notes_path": "releases/v1.0.0-rc.1/RELEASE_NOTES.md"
+}
