@@ -1,4 +1,4 @@
-![WARBL Scala Fingering Laboratory](assets/WARBL_SFL_DOCUMENTATION_MASTHEAD.png)
+![WARBL Scala Fingering Laboratory](docs/assets/WARBL_SFL_DOCUMENTATION_MASTHEAD.png)
 
 # WARBL Scala Fingering Laboratory
 
