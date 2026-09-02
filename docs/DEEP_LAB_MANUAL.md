@@ -357,6 +357,16 @@ The export system preserves source tuning and derived realization as separate co
 
 The **Installed build** area is the in-application provenance/acceptance summary. In public v1.0 it identifies the v1.0.0 executable, recovery lineage, cumulative realtime repairs, geometric/trill/profile-safe-yaw promotion history, and the current acceptance boundary. Use this section when comparing a user's report against an older RC or developer build.
 
+### GitHub Pages and `index.html`
+
+The public repository also contains `index.html`. This file is the browser entry point used by GitHub Pages at:
+
+**https://burningcicada.github.io/warbl-scala-fingering-laboratory/**
+
+For v1.0, `index.html` is intended to contain the same stable Laboratory application as `WARBL_Scala_Fingering_Lab_v1_0.html`; it is not a separate feature branch or alternate edition. The explicitly named HTML remains the frozen v1.0 release artifact, while `index.html` provides the conventional root entry point expected by GitHub Pages and a convenient local launch after downloading the repository.
+
+Do not develop the two public files independently. Future musical/runtime changes belong in `WARBL_Scala_Fingering_Lab_v1_0_DEV.html` until they pass the project regression and physical-witness gates. At promotion, the public Pages entry should be regenerated from the accepted stable release rather than edited as a third code line.
+
 ## 25. Support and updates
 
 Public support is routed through GitHub Issues. The Lab pre-fills version, active tuning, and browser/OS information. Attach Flight Recorder evidence whenever it can reproduce the issue.
@@ -417,3 +427,13 @@ v1.0 deliberately does not claim:
 - that a continuous IMU/pressure/bend stream has one universal musical meaning.
 
 Those boundaries are part of the Laboratory's reliability model, not omissions to hide.
+
+### Confirmed v1.0 legato-continuity edge case
+
+A post-release physical Flight Recorder witness on Linux reproduced a current-code edge case in **Lab fingering / live-sensor mode**. Breath-separated attacks in the same Ptolemy test centered correctly, but under uninterrupted breath a decisive fingering change could leave **physical degree = mapped degree** while the **sounding degree remained the previous degree**. The geometric-continuity layer continued carrying displacement while waiting for additional bend travel. In one witnessed 3→4 transition, degree 4 was physically and logically selected but the sounding state remained degree 3 until breath release.
+
+This is classified as a software-interpretation defect in the current v1.0 legato-continuity path, not as a change to Scala source identity and not as evidence of a WARBL hardware failure. The public v1.0 artifact remains frozen. The developer repair must preserve the accepted subtle finger-lift behavior while adding a reliable distinction between a partial expressive fingering gesture and a decisive completed fingering change.
+
+The permanent regression requirement for the repair is:
+
+**With continuous breath, a decisive new fingering must be able to reach its exact mapped Scala degree without requiring unrelated additional pitch-bend travel; partial expressive fingering movement must retain geometric continuity.**

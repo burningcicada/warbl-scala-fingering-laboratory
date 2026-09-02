@@ -3,17 +3,29 @@
 # WARBL Scala Fingering Laboratory — Quick Start
 
 **Version:** v1.0  
-**Primary application:** `WARBL_Scala_Fingering_Lab_v1_0.html`  
+**Frozen v1.0 application:** `WARBL_Scala_Fingering_Lab_v1_0.html`  
+**Pages / convenient local entry:** `index.html`  
 **Purpose:** choose a Scala tuning, generate an understandable WARBL mapping, hear exact pitch, connect the controller, play, and export the result without first learning the entire Deep Laboratory.
 
 ## 1. Open the Lab
 
-1. Unzip the release folder somewhere you can keep it.
-2. Double-click `WARBL_Scala_Fingering_Lab_v1_0.html`.
-3. Open it as a **top-level page** in a current Chromium-based desktop browser with Web MIDI available.
-4. When you want hardware input, press **Connect WARBL / MIDI** and allow the browser's MIDI permission request.
+### Live browser launch
 
-The Laboratory is a self-contained HTML application; it does not require a server or installer. The embedded WARBL SFL artwork is used as the browser favicon. Your operating system may still show the icon of the browser associated with `.html` files in its file manager; that behavior belongs to the OS, not to the Lab.
+The public v1.0 Laboratory is available at:
+
+**https://burningcicada.github.io/warbl-scala-fingering-laboratory/**
+
+Open it as a **top-level page** in a current Chromium-based desktop browser with Web MIDI available. When you want hardware input, press **Connect WARBL / MIDI** and allow the browser's MIDI permission request.
+
+### Downloaded / local launch
+
+1. Download or clone the public repository and extract it somewhere you can keep it.
+2. Open `index.html` for the simplest local launch, or open `WARBL_Scala_Fingering_Lab_v1_0.html` if you want the explicitly named frozen v1.0 release file.
+3. Use the same **Connect WARBL / MIDI** control when hardware input is needed.
+
+`index.html` is intentional. It is the GitHub Pages entry file and, for v1.0, is intended to contain the same stable Laboratory application as `WARBL_Scala_Fingering_Lab_v1_0.html`; it is not a separate edition. The named release file remains the explicit frozen v1.0 artifact. Future development belongs in the developer build rather than in an independently edited `index.html`.
+
+The Laboratory is a self-contained HTML application; it does not require an installer. The embedded WARBL SFL artwork is used as the browser favicon. Your operating system may still show the icon of the browser associated with `.html` files in its file manager; that behavior belongs to the OS, not to the Lab.
 
 ## 2. Start in Discover
 
@@ -93,6 +105,12 @@ The important v1.0 rule is simple:
 RC5.10 geometric continuity removes the old fixed-cent commitment rule. When raw fingering changes, the currently audible pitch is preserved at the instant of the change and physical bend travel pays the remaining distance to the exact destination. When the destination is reached, the degree centers exactly.
 
 For rapid repeated A↔B motion, the Lab can recognize a recurrent physical edge and use **rapid-alternation / trill assistance** so a trill can reach exact mapped centers instead of repeatedly being trapped in unfinished geometric debt.
+
+### Known v1.0 legato-continuity issue
+
+A current physical Flight Recorder witness shows an edge case in **Lab fingering / live-sensor mode**: during uninterrupted breath, a decisive fingering change can sometimes remain associated with the previous sounding degree while geometric continuity waits for additional bend travel. A fresh breath-separated attack centers correctly in the same test.
+
+If a sustained-legato transition sounds displaced, briefly re-articulate or take a new breath to establish the new Scala center. The issue is being treated as a software-interpretation defect in the v1.0 continuity layer and is being repaired in the developer line. The public v1.0 artifact remains frozen while that repair is tested against the existing geometric-continuity regressions.
 
 ## 8. Use Recommended Playable Field for larger tunings
 
