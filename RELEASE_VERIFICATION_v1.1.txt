@@ -1,6 +1,8 @@
 PASS  APP_VERSION v1.1.0
 PASS  stable BUILD_CLASS
 PASS  no dev version marker
+PASS  public status banner says stable public release
+PASS  no developer-repository identity in promoted HTML
 PASS  G3.2 scheduler retained
 PASS  Space slider reaches 100%
 PASS  Space runtime clamps at 1.0

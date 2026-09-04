@@ -6,7 +6,7 @@
 
 
 > **v1.1 update:** sustained-legato degree ownership now uses the G3.2 Finger Commitment Envelope with a conservative internal-reference 24→32 ms Web Audio-clock arrival; Listening Space range is 0–100%. Historical v1.0 sections below are retained where they document the prior release and its evidence.
-**Companion build:** `WARBL_Scala_Fingering_Lab_v1_0_DEV.html` for developer-repository work  
+**Developer line:** maintained separately from the public v1.1 artifact; developer builds are not part of the public release package.  
 **Audience:** advanced performers, instrument builders, tuning researchers, developers, testers, and anyone who needs to understand why the Laboratory behaves as it does.
 
 ## 1. Deep Laboratory: what changes and what does not

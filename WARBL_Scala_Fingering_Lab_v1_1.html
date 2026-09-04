@@ -1527,7 +1527,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
     </div>
   </header>
 
-  <div id="statusMessage" class="status" data-tone="neutral">WARBL Scala Fingering Lab v1.1 developer repository build. Musical/runtime core matches v1.0; diagnostics and future changes belong here until they pass the release gate.</div>
+  <div id="statusMessage" class="status" data-tone="neutral">WARBL Scala Fingering Lab v1.1 stable public release. G3.2 Finger Commitment Envelope and Listening Space 0–100% are promoted; future changes remain in the developer line until they pass the release gate.</div>
 
 
   <nav class="workspace-tabs" aria-label="Primary workspace">
@@ -3656,7 +3656,7 @@ function buildProfile(scale, mapping, states, options, validation, device = null
   return {
     schema: 'org.warbl-scala-fingering-laboratory.profile.v0.4.6',
     generatedAt: new Date().toISOString(),
-    status: 'v1.1 developer repository build; musical/runtime core matches v1.0 at promotion; future edits must pass the executable release gate before public promotion',
+    status: 'v1.1 stable public release; G3.2 Finger Commitment Envelope and Listening Space 0–100% promoted; future edits must pass the executable release gate before public promotion',
     sourceScale: {
       filename: scale.filename,
       fingerprint: scale.fingerprint ?? scaleFingerprint(scale),
