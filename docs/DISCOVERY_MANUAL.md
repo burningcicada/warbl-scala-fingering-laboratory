@@ -2,7 +2,10 @@
 
 # WARBL Scala Fingering Laboratory — Discovery Manual
 
-**Version:** v1.0  
+**Version:** v1.1  
+
+
+> **v1.1 update:** sustained-legato degree ownership now uses the G3.2 Finger Commitment Envelope with a conservative internal-reference 24→32 ms Web Audio-clock arrival; Listening Space range is 0–100%. Historical v1.0 sections below are retained where they document the prior release and its evidence.
 **Audience:** musicians, composers, educators, and curious microtonal performers who want to explore a tuning before entering the Laboratory's deepest controller, mapping, and diagnostic layers.
 
 ## Discovery is a musical path, not a simplified engine

@@ -1,0 +1,13 @@
+PASS  APP_VERSION v1.1.0
+PASS  stable BUILD_CLASS
+PASS  no dev version marker
+PASS  G3.2 scheduler retained
+PASS  Space slider reaches 100%
+PASS  Space runtime clamps at 1.0
+PASS  v1.1 in-app repair note
+PASS  index byte-identical
+PASS  no duplicate element ids
+PASS  manifest v1.1.0
+PASS  README documents legato fix
+PASS  README documents Space 100
+PASS  inline JavaScript syntax (node --check)
