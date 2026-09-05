@@ -1,24 +1,16 @@
-# WARBL Scala Fingering Laboratory v1.1 — GitHub Deployment Checklist
+# WARBL Scala Fingering Laboratory v1.1.0 — GitHub deployment checklist
 
-Upload/replace these paths on the repository's GitHub Pages branch (normally `main`):
+This package is prepared for the public `main` branch.
 
-1. `index.html` — replace current Pages entry.
-2. `WARBL_Scala_Fingering_Lab_v1_1.html` — add named stable v1.1 artifact.
-3. `README.md` — replace current README.
-4. `RELEASE_NOTES_v1.1.md` — add release notes.
-5. `updates/latest.json` — replace update manifest.
-6. `docs/QUICK_START.md` — replace.
-7. `docs/DISCOVERY_MANUAL.md` — replace.
-8. `docs/DEEP_LAB_MANUAL.md` — replace.
-9. `SHA256SUMS.txt` — replace/add release checksums.
-10. `RELEASE_VERIFICATION_v1.1.txt` — replace/add release verification record.
+1. Open the repository and choose **Add file → Upload files**.
+2. Upload the **contents of this ZIP**, preserving folders. Do not upload the ZIP itself into the repository root.
+3. Existing `index.html` and `WARBL_Scala_Fingering_Lab_v1_1.html` should be replaced. Existing historical `WARBL_Scala_Fingering_Lab_v1_0.html` should remain untouched.
+4. Confirm the new `profiles/WARBL2/` and `docs/verification/` folders are included.
+5. Use commit message: `Promote v1.1.0 visual witness alignment`
+6. Wait for GitHub Pages deployment to turn green.
+7. Open the live Lab and confirm the blue status line begins **“WARBL Scala Fingering Lab v1.1 stable public release.”**
+8. Import a Scala file, connect WARBL2, and verify a tonic→second-degree fingering transition: if Physical/ Mapped reach degree 2 before commitment, the primary Sounding identity must remain tonic until the audible carrier transfers.
+9. Confirm **Latency & Wake Probe** is collapsed at launch.
+10. If the live page passes, create/publish GitHub Release tag `v1.1.0` titled **WARBL Scala Fingering Laboratory v1.1** and attach the public release ZIP and named HTML artifact.
 
-The existing `WARBL_Scala_Fingering_Lab_v1_0.html` may remain in the repository as the frozen v1.0 historical artifact.
-
-After committing, verify:
-
-- https://burningcicada.github.io/warbl-scala-fingering-laboratory/ reports v1.1.0;
-- the top status banner says **stable public release**, not developer repository build;
-- the update checker reports v1.1.0 as current;
-- `index.html` and `WARBL_Scala_Fingering_Lab_v1_1.html` have identical SHA-256;
-- GitHub Release tag is `v1.1.0` and its primary HTML asset is `WARBL_Scala_Fingering_Lab_v1_1.html`.
+The optional reference controller preset is `profiles/WARBL2/WARBL_SFL_reference_preset.warbl`. It is never loaded automatically.

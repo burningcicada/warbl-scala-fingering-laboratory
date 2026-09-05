@@ -1,0 +1,130 @@
+{
+  "build_sha256": "fb4997987db7ef0d1d0cdd8509bc4c8b813b1653fba53f366e3cdbfea357faa6",
+  "startup": {
+    "ready": "complete",
+    "title": "WARBL Scala Fingering Lab v1.1 \u2014 Portable",
+    "debug": "object",
+    "probeCollapsed": "true",
+    "probeTitle": "Latency & Wake Probe",
+    "status": "WARBL Scala Fingering Lab v1.1 stable public release. Exact Scala identity, WARBL performance witness, G3.2 finger commitment, and Listening Space are available here."
+  },
+  "visible_language_forbidden_terms": {
+    "developer repository build": false,
+    "Frozen dev.2.1.2": false,
+    "RC5.10 geometric": false,
+    "recovered.2": false,
+    "audit.12b": false,
+    "Visual Witness Test": false,
+    "visual witness test build": false,
+    "WSFL HTML": false
+  },
+  "reference_scale": {
+    "filename": "CPG_Harmonic_2x1_1x0+1x1.scl",
+    "sourceRows": 58,
+    "renderedRows": 58,
+    "notationVisibleRows": 58,
+    "pass": true,
+    "count": 57,
+    "maxErrorPx": 0,
+    "zeroBendPreserved": true
+  },
+  "trace_confirmed_divergence_regression": {
+    "w": {
+      "source": "warbl-live",
+      "gate": true,
+      "physicalDegreeKey": "1",
+      "mappedDegreeKey": "1",
+      "soundingDegreeKey": "0",
+      "soundingCenterCents": 0,
+      "appliedExpressionCents": 2.34375,
+      "livePitchCents": 2.34375,
+      "visualFrequencyHz": 294.0626014201166,
+      "reportedFrequencyHz": 294.0626014201166,
+      "residualCents": 0,
+      "breath": 0.72,
+      "timbre": 0,
+      "channel": 1,
+      "note": null,
+      "velocity": 0
+    },
+    "dom": {
+      "wheel": {
+        "physical": [
+          "1"
+        ],
+        "mapped": [
+          "1"
+        ],
+        "sounding": [
+          "0"
+        ]
+      },
+      "mapping": {
+        "physical": [
+          "1"
+        ],
+        "mapped": [
+          "1"
+        ],
+        "sounding": [
+          "0"
+        ]
+      },
+      "notation": {
+        "physical": [
+          "1"
+        ],
+        "mapped": [
+          "1"
+        ],
+        "sounding": [
+          "0"
+        ]
+      }
+    },
+    "activeTitle": "Sounding \u00b7 Degree 1 \u2014 1/1",
+    "activeMeta": "0.000c \u00b7 293.6648 Hz",
+    "activeRationale": "Preserves the selected lineage's native rank and MIDI-note grammar; transition cost 0.00, static correction +0.000 cents. Access: Alternate access \u2014 This degree is uniquely identifiable and has 48 compiled WARBL states (47 alternates). Live authority: this panel follows the sounding degree; physical and mapped candidates remain secondary witnesses.",
+    "wheelCenter": "1/1",
+    "notationLive": "Sounding 1/1 @ 0.000\u00a2 \u00b7 live 2.344\u00a2 \u00b7 deviation +2.34\u00a2 \u00b7 breath 72%"
+  },
+  "expressive_deviation": {
+    "w": {
+      "source": "warbl-live",
+      "gate": true,
+      "physicalDegreeKey": "1",
+      "mappedDegreeKey": "1",
+      "soundingDegreeKey": "0",
+      "soundingCenterCents": 0,
+      "appliedExpressionCents": 7.25,
+      "livePitchCents": 7.25,
+      "visualFrequencyHz": 294.8971453760142,
+      "reportedFrequencyHz": 294.8971453760142,
+      "residualCents": 0,
+      "breath": 0.72,
+      "timbre": 0,
+      "channel": 1,
+      "note": null,
+      "velocity": 0
+    },
+    "sample": {
+      "t": 4466,
+      "frequency": 294.8971453760142,
+      "visualFrequencyHz": 294.8971453760142,
+      "soundingCenterCents": 0,
+      "livePitchCents": 7.25,
+      "breath": 0.72,
+      "timbre": 0,
+      "degreeKey": "0",
+      "bend": 7.25,
+      "channel": 1,
+      "note": null,
+      "velocity": 0,
+      "gate": true,
+      "source": "warbl-live"
+    },
+    "formulaError": 0,
+    "phraseStatus": "Performance witness: Physical D2 21/20 @ 84.467\u00a2 \u00b7 mapped D2 21/20 @ 84.467\u00a2 \u00b7 sounding D1 1/1 @ 0.000\u00a2 \u00b7 live pitch 7.250\u00a2 (+7.25\u00a2)Phrase Y-position = sounding Scala center + applied expressive deviation."
+  },
+  "pass": true
+}

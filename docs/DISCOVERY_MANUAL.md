@@ -90,7 +90,7 @@ The Discovery area links to **Scale Workshop** for creating, hearing, modifying,
 
 The **Learn & Create** section also points outward to resources for Scala, Erv Wilson, Helmholtz–Ellis, Sagittal, Ben Johnston notation, and official WARBL documentation. These sites are study resources; the Lab does not copy their content or claim that every external notation system is currently rendered automatically.
 
-The public v1.0 notation choices are **Aperture** and **Conventional note + cents**.
+The v1.1 notation choices are **Aperture** and **Conventional note + cents**.
 
 ## 4. Choose the center: establish a performance reference
 
@@ -261,3 +261,7 @@ The v1.0 promotion gate preserved the accepted musical core while changing relea
 The recorded multi-tuning WARBL2 trace contains 282 geometric arrivals, all reaching physical = mapped = sounding degree with 0¢ applied bend at arrival, plus 16 exact-center rapid-alternation commits. No critical Flight Recorder events were dropped. The trace also recorded browser/main-thread stalls during idle/non-sounding moments; that performance observation remains documented rather than being hidden.
 
 Advanced yaw/button tuning navigation is intentionally **opt-in** and remains separately scoped for physical profile acceptance. External synth/DAW compatibility remains destination-specific.
+
+## v1.1 performance-witness reading
+
+When Physical/ mapped and Sounding disagree briefly, read that disagreement as a transition witness rather than as three competing pitch authorities. Sounding is the primary musical identity; Physical and Mapped describe the controller/topology state that may be leading toward the next commitment. Phrase Shape shows continuous live pitch on the imported Scala cent geometry.

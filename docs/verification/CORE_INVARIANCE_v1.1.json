@@ -1,0 +1,69 @@
+{
+  "parent_sha256": "b00efc6f14780547adfbc90e47f6453fe74173be84b6b056f3f3f1c590410aa7",
+  "candidate_sha256": "fb4997987db7ef0d1d0cdd8509bc4c8b813b1653fba53f366e3cdbfea357faa6",
+  "protected_functions": [
+    {
+      "name": "establishGeometricCenter",
+      "identical": true,
+      "parent": "a4eb18e6f45b876c625d84399beeb0e1435c768620c62a255b516f5bdcef8d04",
+      "candidate": "a4eb18e6f45b876c625d84399beeb0e1435c768620c62a255b516f5bdcef8d04"
+    },
+    {
+      "name": "startWitnessLadderCandidate",
+      "identical": true,
+      "parent": "06e645d03ccc6d39d0b1059002d20b8bd2f88e3ff28c62e9f7914e48d354fed3",
+      "candidate": "06e645d03ccc6d39d0b1059002d20b8bd2f88e3ff28c62e9f7914e48d354fed3"
+    },
+    {
+      "name": "advanceGeometricFingerContinuity",
+      "identical": true,
+      "parent": "326fc0b1a8c3e4340017467ba15d62814fb7cdcc66eea50339f17a3f7f4abe9a",
+      "candidate": "326fc0b1a8c3e4340017467ba15d62814fb7cdcc66eea50339f17a3f7f4abe9a"
+    },
+    {
+      "name": "reconcileLivePerformanceState",
+      "identical": true,
+      "parent": "4e6114268d8da8f099a97027fef7882a5ac86ec88ddc7e8fc28e970364462e5e",
+      "candidate": "4e6114268d8da8f099a97027fef7882a5ac86ec88ddc7e8fc28e970364462e5e"
+    },
+    {
+      "name": "handleMidiMessage",
+      "identical": true,
+      "parent": "0964a7eaa5e8914891a60c655f1110b04a89ff032ba23396c9d8f6b1380ed45c",
+      "candidate": "0964a7eaa5e8914891a60c655f1110b04a89ff032ba23396c9d8f6b1380ed45c"
+    },
+    {
+      "name": "scheduleG32FrequencyArrival#1",
+      "identical": true,
+      "parent": "7de6517b2fb5156a893a6f04f6a949b80ebeb0d637b1d85e42c372f37aa367a8",
+      "candidate": "7de6517b2fb5156a893a6f04f6a949b80ebeb0d637b1d85e42c372f37aa367a8"
+    },
+    {
+      "name": "scheduleG32FrequencyArrival#2",
+      "identical": true,
+      "parent": "cd5879e5935a3cd026ca495b556a01267f7bb166305a9c3a0e34760878548004",
+      "candidate": "cd5879e5935a3cd026ca495b556a01267f7bb166305a9c3a0e34760878548004"
+    }
+  ],
+  "protected_constants": [
+    {
+      "name": "WITNESS_LADDER_PHASE_LOOKBACK_MS",
+      "identical": true,
+      "parent": "const WITNESS_LADDER_PHASE_LOOKBACK_MS = 32;",
+      "candidate": "const WITNESS_LADDER_PHASE_LOOKBACK_MS = 32;"
+    },
+    {
+      "name": "G32_AUDIO_FALLBACK_START_MS",
+      "identical": true,
+      "parent": "const G32_AUDIO_FALLBACK_START_MS = WITNESS_LADDER_NORMAL_CONFIRM_MS;",
+      "candidate": "const G32_AUDIO_FALLBACK_START_MS = WITNESS_LADDER_NORMAL_CONFIRM_MS;"
+    },
+    {
+      "name": "G32_AUDIO_FALLBACK_END_MS",
+      "identical": true,
+      "parent": "const G32_AUDIO_FALLBACK_END_MS = WITNESS_LADDER_NORMAL_CONFIRM_MS + WITNESS_LADDER_NORMAL_RESIDUAL_MS;",
+      "candidate": "const G32_AUDIO_FALLBACK_END_MS = WITNESS_LADDER_NORMAL_CONFIRM_MS + WITNESS_LADDER_NORMAL_RESIDUAL_MS;"
+    }
+  ],
+  "pass": true
+}

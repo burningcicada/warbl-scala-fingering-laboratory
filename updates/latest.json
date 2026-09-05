@@ -1,8 +1,8 @@
 {
   "version": "1.1.0",
   "channel": "stable",
-  "published": "2026-09-04",
+  "published": "2026-09-05",
   "github_release_url": "https://github.com/burningcicada/warbl-scala-fingering-laboratory/releases/tag/v1.1.0",
   "primary_asset": "WARBL_Scala_Fingering_Lab_v1_1.html",
-  "notes": "v1.1 repairs sustained-legato degree ownership with the physically preferred G3.2 Finger Commitment Envelope and restores Listening Space to 0–100%. External receiver compatibility remains destination-specific."
+  "notes": "v1.1 repairs sustained-legato degree ownership, aligns live visual witnesses to the actually sounding Scala degree, restores Listening Space to 0\u2013100%, and includes an optional WARBL2 reference preset."
 }

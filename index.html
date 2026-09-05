@@ -298,6 +298,16 @@ html[data-theme="nocturne"] .status { background: #171b2a; color: var(--ink); }
 .wheel-degree.sounding circle { fill: var(--accent); filter: drop-shadow(0 0 5px var(--accent)); }
 .wheel-degree.physical-observed circle { stroke: var(--green); stroke-width: 3; }
 .wheel-degree.physical-observed.sounding circle { stroke-width: 3.5; }
+.wheel-degree.mapped-candidate circle { stroke: var(--blue); stroke-width: 2; stroke-dasharray: 3 2; }
+.wheel-degree.mapped-candidate.physical-observed circle { stroke-dasharray: 4 2; }
+.notation-degree.physical-observed .note-head { stroke: var(--green); stroke-width: 2.2; }
+.notation-degree.mapped-candidate .note-head { stroke: var(--blue); stroke-width: 1.8; stroke-dasharray: 3 2; }
+.mapping-table tr.witness-sounding > td:first-child { box-shadow: inset 4px 0 0 var(--accent); }
+.mapping-table tr.witness-physical > td:nth-child(2) { box-shadow: inset 0 -2px 0 var(--green); }
+.mapping-table tr.witness-mapped > td:nth-child(2) { outline: 1px dashed var(--blue); outline-offset: -3px; }
+.performance-witness-status { margin:.45rem 0 .7rem; padding:.48rem .62rem; border:1px solid var(--line); border-radius:8px; background:color-mix(in srgb,var(--panel) 82%,transparent); color:var(--muted); font-size:.72rem; line-height:1.45; }
+.performance-witness-status strong { color:var(--text); }
+
 .wheel-degree.practice-target circle { stroke: var(--orange); stroke-width: 3; }
 .practice-layout { display: grid; grid-template-columns: minmax(260px, .85fr) minmax(320px, 1.15fr); gap: 1rem; align-items: start; }
 .practice-card { padding: 1rem; border-radius: 14px; background: var(--subtle); border: 1px solid var(--line); }
@@ -1496,9 +1506,9 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
 </style>
 </head>
 <body>
-  <aside id="audit12bProbe" class="audit12b-probe" data-collapsed="false" aria-label="Audit 12b latency and wake probe">
-    <button id="audit12bToggle" class="quiet audit12b-toggle" type="button" aria-expanded="true">Hide</button>
-    <h2>audit.12b · Latency &amp; Wake Probe</h2>
+  <aside id="audit12bProbe" class="audit12b-probe" data-collapsed="true" aria-label="Latency and wake probe">
+    <button id="audit12bToggle" class="quiet audit12b-toggle" type="button" aria-expanded="false">Show</button>
+    <h2>Latency &amp; Wake Probe</h2>
     <div class="audit12b-body">
       <p>Diagnostic only. Lab Fingering / Raw Sensors is the normal playing path; Automatic remains the stricter comparison-verification mode.</p>
       <div class="audit12b-status"><span>Recorder</span><strong id="audit12bRecorderStatus">Idle</strong><span>Audio</span><strong id="audit12bAudioStatus">Not primed</strong><span>Output estimate</span><strong id="audit12bLatencyStatus">—</strong><span>First scroll</span><strong id="audit12bScrollStatus">Not observed</strong><span>Pitch source</span><strong id="audit12bPitchStatus">Lab Fingering</strong><span>Sensor monitor</span><strong id="audit12bSensorStatus">Off</strong></div>
@@ -1527,7 +1537,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
     </div>
   </header>
 
-  <div id="statusMessage" class="status" data-tone="neutral">WARBL Scala Fingering Lab v1.1 stable public release. G3.2 Finger Commitment Envelope and Listening Space 0–100% are promoted; future changes remain in the developer line until they pass the release gate.</div>
+  <div id="statusMessage" class="status" data-tone="neutral">WARBL Scala Fingering Lab v1.1 stable public release. Exact Scala identity, WARBL performance witness, G3.2 finger commitment, and Listening Space are available here.</div>
 
 
   <nav class="workspace-tabs" aria-label="Primary workspace">
@@ -1543,7 +1553,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
   <details id="startHelp" class="start-help">
     <summary><strong>Start here</strong> — browser, launch, MIDI routing, and support</summary>
     <div class="start-help-grid">
-      <section><h2>Open the Lab</h2><p>Double-click <code>the included WSFL HTML file</code> and allow Chrome or another current Chromium-based browser to open it. The complete interface is contained in that one portable file; no server window or platform launcher is required.</p><p>Browser MIDI and WARBL permissions remain browser-controlled. Save valuable projects and mappings as exported files rather than relying only on browser storage.</p></section>
+      <section><h2>Open the Lab</h2><p>Double-click <code>the included WARBL SFL HTML file</code> and allow Chrome or another current Chromium-based browser to open it. The complete interface is contained in that one portable file; no server window or platform launcher is required.</p><p>Browser MIDI and WARBL permissions remain browser-controlled. Save valuable projects and mappings as exported files rather than relying only on browser storage.</p></section>
       <section><h2>Browser</h2><p>Use a current Chromium-based desktop browser with Web MIDI enabled. Open the Laboratory as a top-level page, not inside an embedded frame. The connection diagnostic reports browser context, permission, ports, and incoming traffic without changing the WARBL.</p></section>
       <section><h2>DAW / virtual MIDI</h2><p>Select a virtual MIDI cable or hardware port under <strong>Retuned MIDI destination</strong>, then choose <strong>External Synth / DAW</strong>. On Linux, a visible <code>MIDI Through Port-0</code> is a valid browser-reported MIDI destination. Match the receiving synth's pitch-bend range to the Laboratory.</p></section>
       <section><h2>Support</h2><p><a id="supportEmailStart" href="https://github.com/burningcicada/warbl-scala-fingering-laboratory/issues/new" target="_blank" rel="noopener noreferrer">Open a GitHub issue</a> for help, a bug report, or a feature request. The Lab pre-fills build, tuning, and browser information; attach a Flight Recorder export when relevant.</p></section>
@@ -1748,9 +1758,9 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
                       <option value="harmonic-reed" selected>Harmonic Reed — Performer Reference</option>
                       <option value="sine">Pure Sine — Pitch Measurement Control</option>
                       <option value="legacy">Legacy Reference Voice — Safe Hold</option>
-                      <option value="pipe">Reference Pipe — Physical Model Candidate</option><option value="pipe-coupled">Reference Pipe — Coupled Bore Experiment</option>
+                      <option value="pipe">Reference Pipe — Experimental Physical Model</option><option value="pipe-coupled">Reference Pipe — Coupled Bore Experiment</option>
                     </select>
-                    <small id="referenceInstrumentHint" class="field-hint">Frozen dev.2.1.2 oscillator behavior. Use this as the A/B control.</small>
+                    <small id="referenceInstrumentHint" class="field-hint">Known-stable exact-frequency comparison voice. Use this as the A/B control.</small>
                   </label>
                   <span class="tag">A/B</span>
                 </div>
@@ -1839,7 +1849,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
 
     <section id="phraseShapePanel" class="panel phrase-shape-panel" aria-labelledby="phraseShapeTitle">
       <div class="section-title">
-        <div><p class="eyebrow">Evidence becomes gesture</p><h2 id="phraseShapeTitle">Phrase Shape / Aperture</h2><p>The active Scala file now <strong>builds the pitch field at the left of the spectrogram</strong>. The exact white MPE trajectory remains primary evidence; line thickness follows pressure. Boxed landings show degree, ratio/cents, expressive deviation, and live MPE context. Aperture can then compress several microgestures into a few broad narrative forms without replacing the evidence underneath.</p></div>
+        <div><p class="eyebrow">Evidence becomes gesture</p><h2 id="phraseShapeTitle">Phrase Shape / Aperture</h2><p>The active Scala file <strong>builds the pitch field at the left of the spectrogram</strong>. The white performance trajectory is registered to the same Scala-cent coordinate: sounding Scala center + applied expressive deviation. Line thickness follows pressure. Boxed landings show degree, ratio/cents, expressive deviation, and live MPE context. Aperture can then compress several microgestures into a few broad narrative forms without replacing the evidence underneath.</p></div>
         <div class="geometry-title-actions"><span class="tag">Scala landscape · MPE evidence · narrative</span><div class="focus-pin-actions"><button class="quiet" type="button" data-pin-target="phraseShapePanel">Pin</button></div></div>
       </div>
       <div class="phrase-shape-toolbar">
@@ -1851,13 +1861,13 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
           <button id="phraseShapeDemo" class="secondary" type="button">Play a short demo</button><button id="clearPhraseShape" class="quiet" type="button">Clear view</button>
         </div>
       </div>
-      <div id="phraseStrataReadout" class="phrase-strata-readout">The Scala file defines the proportional pitch landscape; MPE performance draws the path.</div>
+      <div id="phraseStrataReadout" class="phrase-strata-readout">The Scala file defines the proportional pitch landscape; MPE performance draws the path.</div><p id="phraseWitnessStatus" class="performance-witness-status"><strong>Performance witness:</strong> waiting for live or Reference Instrument pitch.</p>
       <div id="phraseShapeStage" class="phrase-shape-stage">
         <canvas id="phraseSpectrogram" width="1200" height="380" aria-label="Live dark sound spectrogram"></canvas>
         <canvas id="phraseOverlay" width="1200" height="380" aria-label="Scala pitch landscape, exact MPE trajectory, expressive deviation, live MPE evidence, and broad Aperture narrative forms"></canvas>
       </div>
       <p class="phrase-layer-help"><strong>Evidence rule:</strong> Scala lines and MPE values are measured or deterministically derived. The pale broad forms are <strong>interpretations</strong>: delayed, provisional when necessary, and always recoverable to the source span shown below. <strong>Aperture may dream, but every dream must be reversible to evidence.</strong></p>
-      <div class="phrase-shape-footer"><p id="phraseShapeStatus">Ready. Play the internal Reference Instrument or run the short demo.</p><p><strong>White trajectory:</strong> pitch from actual MPE bend; thickness follows pressure. <strong>Boxes:</strong> Scala target + deviation + pressure/CC74/channel when present. <strong>Broad forms:</strong> sparse temporal compression, not event-by-event icons.</p></div>
+      <div class="phrase-shape-footer"><p id="phraseShapeStatus">Ready. Play the internal Reference Instrument or run the short demo.</p><p><strong>White trajectory:</strong> sounding Scala center + applied expressive deviation on the same cent geometry as the Scala landmarks; thickness follows pressure. <strong>Boxes:</strong> Scala target + deviation + pressure/CC74/channel when present. <strong>Broad forms:</strong> sparse temporal compression, not event-by-event icons.</p></div>
       <div id="phraseSymbolEvidence" class="phrase-symbol-evidence"><h3>Aperture narrative — reversible evidence</h3><p class="phrase-narrative-note">Each form is stored as an interpretation of a specific source span. Measured, derived, and interpreted information are kept visibly separate.</p><div id="phraseEventLedger" class="phrase-event-ledger" aria-live="polite"><div class="phrase-event-card"><strong>No narrative form yet</strong><small>Play a phrase. Aperture waits for enough temporal evidence before it compresses the motion.</small></div></div></div>
     </section>
 
@@ -1973,7 +1983,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
     <section class="laboratory-grid">
       <article id="pitchGeometryPanel" class="panel geometry-panel">
         <div class="section-title"><div><h2>Pitch geometry</h2><p>Click any degree to audition its exact frequency.</p></div><div class="geometry-title-actions"><span class="tag">exact Scala space</span><div class="focus-pin-actions"><button class="quiet" type="button" data-pin-target="pitchGeometryPanel">Pin</button></div></div></div>
-        <div class="geometry-toolbar"><label>Labels<select id="wheelLabelMode"><option value="compact">Compact</option><option value="full">Full</option><option value="minimal">Minimal</option><option value="ondemand">On demand</option></select></label><label>Interior<select id="wheelInteriorMode"><option value="character" selected>Scale character</option><option value="density">Interval density</option><option value="field">Playable field</option><option value="none">None</option></select></label><label>Geometry spread<input id="wheelSpread" type="range" min="1" max="1.8" step="0.05" value="1"><output id="wheelSpreadReadout">1.00×</output></label><label class="check-label"><input id="wheelFocusMode" type="checkbox" checked> Focus opacity</label><label class="check-label"><input id="wheelClusterMode" type="checkbox" checked> Expanded Aperture</label><div class="button-row compact geometry-actions"><button id="autoExpandWheel" class="secondary" type="button">Auto readable spread</button><button id="resetWheelSpread" class="quiet" type="button">Reset</button></div></div><p id="wheelGeometryAuthority" class="geometry-authority">The outer pitch nodes show the complete Scala source at exact cent angles. A green ring follows the physically observed live WARBL fingering even when no note is authorized; the sounding degree remains a separate filled highlight. Interior color and the inner field shape show interval structure and the selected playable field; Expanded Aperture fans crowded local degrees outward without moving their source nodes.</p>
+        <div class="geometry-toolbar"><label>Labels<select id="wheelLabelMode"><option value="compact">Compact</option><option value="full">Full</option><option value="minimal">Minimal</option><option value="ondemand">On demand</option></select></label><label>Interior<select id="wheelInteriorMode"><option value="character" selected>Scale character</option><option value="density">Interval density</option><option value="field">Playable field</option><option value="none">None</option></select></label><label>Geometry spread<input id="wheelSpread" type="range" min="1" max="1.8" step="0.05" value="1"><output id="wheelSpreadReadout">1.00×</output></label><label class="check-label"><input id="wheelFocusMode" type="checkbox" checked> Focus opacity</label><label class="check-label"><input id="wheelClusterMode" type="checkbox" checked> Expanded Aperture</label><div class="button-row compact geometry-actions"><button id="autoExpandWheel" class="secondary" type="button">Auto readable spread</button><button id="resetWheelSpread" class="quiet" type="button">Reset</button></div></div><p id="wheelGeometryAuthority" class="geometry-authority">The outer pitch nodes show the complete Scala source at exact cent angles. A green ring follows the physically observed live WARBL fingering even when no note is authorized; the sounding degree remains a separate filled highlight. Interior color and the inner field shape show interval structure and the selected playable field; Expanded Aperture fans crowded local degrees outward without moving their source nodes.</p><p id="wheelWitnessStatus" class="performance-witness-status"><strong>Performance witness:</strong> physical, mapped, and sounding identities are shown separately.</p>
         <svg id="scaleWheel" viewBox="0 0 360 360" role="img" aria-label="Circular Scala pitch map"></svg>
       </article>
 
@@ -2080,7 +2090,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
         <label>Button candidate<select id="performanceTuningButtonNumber"><option value="1">Button 1</option><option value="2" selected>Button 2</option><option value="3">Button 3 — guarded</option></select></label>
       </div>
       <div class="button-row compact"><button id="performanceTuningNext" type="button">Next bundled tuning</button><button id="performanceTuningLearnYaw" class="secondary" type="button">Learn yaw MIDI CC</button><button id="performanceTuningCenterYaw" class="secondary" type="button">Set current yaw center</button><button id="performanceTuningLearnButton" class="secondary" type="button">Learn safe button message</button></div>
-      <output id="performanceTuningNavigationStatus" class="scene-status">Disabled. RC5.10 geometric fingering behavior is unchanged.</output>
+      <output id="performanceTuningNavigationStatus" class="scene-status">Disabled. Core fingering behavior is unchanged.</output>
       <p class="boundary"><strong>Safety:</strong> WARBL yaw is configurable, so the Lab never assumes a fixed yaw CC. Yaw navigation observes the learned yaw message without claiming, remapping, suppressing, or consuming it; any yaw role already present in the active controller profile continues unchanged. Because a shared expressive yaw gesture can also cross the navigation excursion, enable this only deliberately and set the excursion outside the performer's ordinary expressive range. Button learning does not rewrite WARBL firmware; it is allowed only when the selected Lab control role is free, and Button 3 remains guarded because WARBL uses it for critical/power gestures. A tuning request made while a note is sounding is queued and commits only at the final release boundary.</p>
     </section>
 
@@ -2106,7 +2116,7 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
 
     <section class="panel mapping-panel deep-only">
       <div class="section-title"><div><h2>Mapping Studio</h2><p>Change a fingering or MIDI anchor, then lock it. Manual-first treats locks as hard constraints; every strategy publishes physical, bend, and access outcomes.</p></div><span class="tag">editable proposal</span></div>
-      <p id="mappingLimitNotice" class="render-limit" hidden></p>
+      <p id="mappingLimitNotice" class="render-limit" hidden></p><p id="mappingWitnessStatus" class="performance-witness-status"><strong>Performance witness:</strong> filled accent = sounding row; green underline = physical WARBL row; dashed blue = mapped candidate.</p>
       <div class="table-wrap">
         <table class="mapping-table">
           <thead><tr><th>Degree</th><th>Exact identity</th><th>WARBL fingering</th><th>MIDI</th><th>Correction</th><th>Access</th><th>Author</th><th>Note</th></tr></thead>
@@ -2223,12 +2233,12 @@ html[data-theme="nocturne"] .automatic-authority-authority[data-state="agree"] {
   <details id="aboutLab" class="start-help">
     <summary><strong>About &amp; updates</strong> — version, update manifest, and release boundary</summary>
     <div class="start-help-grid">
-      <section><h2>Installed build</h2><p><strong>WARBL Scala Fingering Lab v1.1.0</strong></p><p><strong>Recovery provenance:</strong> reconstructed from the preserved 07d05eb9… late integration snapshot and the verified audit.12b baseline after the historical c73bcfce… bytes were not recoverable. Software gates are rerun on this identity; core internal WARBL2 performance acceptance is carried by the recorded multi-tuning physical trace, while advanced tuning navigation and external receiver acceptance remain separately scoped.</p><p><strong>Execution-path refinement:</strong> recovered.2 moves diagnostic formatting, Phrase Shape enrichment, lifecycle witnesses, breath presentation, MPE monitor painting, and dormant test taps away from the realtime audio/MIDI handoff while preserving musical authority and output semantics.</p><p><strong>Handoff refinement:</strong> recovered.3 makes TP11 contiguous with the actual reference-output call in normal performance and gives final reference-note release priority over observer/practice work.</p><p><strong>Cumulative realtime refinement:</strong> recovered.4 keeps Flight Recorder hot retention shallow, gives external releases and raw-fingering corrections priority over semantic witnesses, removes repeated full WARBL/MPE/Pattern panel reconstruction from live expression, and defers dense WARBL configuration/sensor presentation while preserving device-state authority.</p><p><strong>Recorder refinement:</strong> recovered.5 retains the recovered.4 cumulative execution repairs while allocating hot retained-evidence copies only when the early/critical evidence ledgers actually need them.</p><p><strong>Physical-workflow correction:</strong> recovered.6 keeps every recovered.5 execution-path repair, makes Lab Fingering the normal performance authority, makes Connect idempotent and starts Live Sensors when possible, auto-pauses/resumes sensors around setup reads, gives Pitch Geometry an independent physical-input witness, reports exact block reasons, replaces idle failure language with ready/standby states, and turns the Notation rendering boundary into a non-interactive instruction callout.</p><p><strong>Physical-trace correction:</strong> recovered.7 keeps recovered.6 authority and UI behavior, makes Lab-fingering pitch bend obey the same per-fingering local anchor during continuous expression and raw-sensor reconciliation, adds a reference-frequency consistency repair after fresh hole state, yields during Project Export ZIP assembly, establishes a deliberate print/non-realtime boundary that discards stale queued MIDI, and records the actual interactive control behind pointer events for future stall attribution.</p><p><strong>Control + raw-state correction:</strong> recovered.8 preserves recovered.7 musical behavior, wires the two Extended Scale Mapping controls, repairs Pattern Tutor / Practice structural signatures, reacquires current raw WARBL state after blocking browser UI, and reduces stale-fingering attack transients by committing paired WARBL hole bytes immediately plus a short conditional raw-sync only inside a recent transition window.</p><p><strong>v1.0 RC precision gate:</strong> exact Scala cents remain floating-point source authority through internal frequency realization; release simulation includes the supplied FirstideaTarsos close pair (852.5373134328358¢ / 855.223880597015¢) plus 1.0¢, 0.5¢, and 0.1¢ internal distinction witnesses. External MIDI/MPE precision remains destination- and bend-range-dependent.</p><p><strong>RC2 transition + space correction:</strong> attacks inside a recent raw-hole transition now wait for a fresh complete high+low WARBL pair commit or a tightly bounded deadline instead of sleeping for a fixed 8 ms. Stable attacks remain immediate. The verified GitHub updater is active, and the Listening Space menu adds exact embedded XenQuill Reference Geometry, Harmonic Nectar, Alternating Apertures, and Late Bloom impulse responses without changing scale or fingering authority.</p><p><strong>v1.1 G3.2 Finger Commitment repair:</strong> the public v1.0 sustained-legato edge case is repaired by separating pitch identity from local finger shading. Raw WARBL topology remains the discrete degree authority; weak/incipient movement does not force an immediate snap, coherent witness evidence may accelerate commitment, and the conservative internal-audio arrival is pre-scheduled on the Web Audio clock across the 24→32 ms window so browser callback stalls cannot indefinitely retain the old carrier.</p><p><strong>v1.1 Listening Space range:</strong> Space amount is restored to 0–100% for Room, Hall, Pipe, and embedded XenQuill impulse-response listening paths. Dry remains available and the Scala/fingering/pitch-authority laws are unchanged.</p><p><strong>RC5.10 Geometric Finger Continuity:</strong> fixed-cent commitment thresholds are removed. Raw WARBL holes identify a destination Scala degree; the currently sounding pitch is preserved exactly when that raw destination changes. Subsequent pitch-bend travel pays the remaining logarithmic distance toward the destination without overshoot, regardless of the sign convention of the WARBL's native fingering chart. Once a mapped center is reached it becomes the committed sounding degree. Local shading around a centered degree is bounded by half the distance to the nearest active Scala center, so a controller-scale mismatch cannot accumulate multi-semitone runaway. A new Note On still establishes the freshest raw degree exactly. Device-reported bend range remains transport calibration only.</p><p><strong>RC5.11.2 Profile-Safe Yaw refinement:</strong> yaw navigation is now a non-exclusive sidecar observer. Learning or triggering from yaw never consumes the learned yaw CC; any existing controller-profile use of yaw continues unchanged. Structural tuning changes remain opt-in and boundary-safe.</p><p><strong>RC5.11 Rapid Alternation + Performance Tuning Navigation test candidate:</strong> this executable uses the recovered cumulative Lab chassis because the exact RC5.6 executable bytes are not present in the accessible archive. The RC5.6 constitution is explicitly re-applied: WARBL Configuration Tool semantics describe device configuration; device recognition never silently changes musical law; the preferred measured transport is Legato slide/vibrato + ±96 + MIDI channel 3 + Pitch Bend before Note On ON + Send Notes as Legato OFF. The internal Harmonic Reed preserves the physically preferred P0.3 whisper response and outgoing MIDI pressure remains raw. The v1.0 line preserves the Lab raw-fingering-to-continuous-pitch translation described above together with the later recurrent-edge trill assist and profile-safe advanced tuning navigation. The internal Harmonic Reed Reference Instrument path has passed physical WARBL2 multi-tuning evidence; external synth/DAW receiver acceptance remains destination-specific.</p><p>The protected RC5.10 geometric law, RC5.11 recurrent-edge trill layer, and RC5.11.2 profile-safe yaw observer have passed the executable simulation/regression gate. Advanced yaw/button tuning navigation remains opt-in and should be verified against the performer’s active controller profile before stage use. Individual subsystems retain separately recorded physical-trace and simulation provenance.</p></section>
+      <section><h2>Installed build</h2><p><strong>WARBL Scala Fingering Lab v1.1.0</strong></p><p><strong>Performance witness:</strong> Pitch Geometry, Mapping Studio, Notation Preview, and Phrase Shape distinguish physical fingering, mapped candidate, and the degree that is actually sounding. During live performance, the sounding degree is the primary musical identity; physical and mapped states remain secondary observational witnesses.</p><p><strong>Pitch geometry:</strong> imported Scala cents remain the visual coordinate authority. The Phrase trajectory is drawn from sounding Scala center + applied expressive deviation.</p><p><strong>Performance boundary:</strong> these witness views are one-way observations. They do not feed back into G3.2 finger commitment, Scala mapping, breath response, outgoing MIDI/MPE, Reference Instrument audio, or Listening Space.</p></section>
       <section class="update-card"><h2>Check for updates</h2><p>The Lab never silently updates itself. This button reads <code>updates/latest.json</code> from the public GitHub repository and offers the release page only when a newer version is published.</p><div class="button-row compact"><button id="checkUpdatesAbout" class="secondary" type="button" title="Query the public GitHub update manifest">Check GitHub for update</button><a id="updateReleaseAbout" class="button-link quiet" href="#" target="_blank" rel="noopener" hidden>View release</a></div><p id="updateStatusAbout" class="update-status">Installed: v1.1.0 · public update channel ready.</p></section>
     </div>
   </details>
 
-  <footer class="app-footer"><p id="projectSnapshotPrintIdentity">Project snapshot identity is generated at export time and included in the Project Export Snapshot ZIP.</p><p>WARBL Scala Fingering Lab v1.1 · stable public release · G3.2 Finger Commitment Envelope + Web Audio 24→32 ms conservative arrival scheduling + Listening Space 0–100% + exact Scala identity + WARBL fingering grammar + Harmonic Reed/P0.3 whisper response + recurrent-edge trill assist + profile-safe opt-in tuning navigation + Flight Recorder + GitHub issue/update paths · WARBL2 physical performance evidence accepted for this release direction · external receiver compatibility remains destination-specific · direct self-contained HTML launch.</p><p><a id="supportEmailFooter" href="https://github.com/burningcicada/warbl-scala-fingering-laboratory/issues/new" target="_blank" rel="noopener noreferrer">Report a bug or request a feature on GitHub</a></p></footer>
+  <footer class="app-footer"><p id="projectSnapshotPrintIdentity">Project snapshot identity is generated at export time and included in the Project Export Snapshot ZIP.</p><p>WARBL Scala Fingering Lab v1.1 · stable public release · exact Scala identity + WARBL performance witness.</p><p><a id="supportEmailFooter" href="https://github.com/burningcicada/warbl-scala-fingering-laboratory/issues/new" target="_blank" rel="noopener noreferrer">Report a bug or request a feature on GitHub</a></p></footer>
 
   <article id="printReport" aria-hidden="true"></article>
 <script>
@@ -3656,7 +3666,7 @@ function buildProfile(scale, mapping, states, options, validation, device = null
   return {
     schema: 'org.warbl-scala-fingering-laboratory.profile.v0.4.6',
     generatedAt: new Date().toISOString(),
-    status: 'v1.1 stable public release; G3.2 Finger Commitment Envelope and Listening Space 0–100% promoted; future edits must pass the executable release gate before public promotion',
+    status: 'v1.1 stable public release; performance-witness views use sounding degree as live musical authority while physical and mapped candidates remain observational',
     sourceScale: {
       filename: scale.filename,
       fingerprint: scale.fingerprint ?? scaleFingerprint(scale),
@@ -5330,7 +5340,7 @@ const MPE_LEGATO_96_TEMPLATE = Object.freeze({
   sendPitchBendBeforeNoteOn: true, sendNotesAsLegato: false,
   provenance: 'Preferred measured WARBL transport signature; Configuration Tool semantics are authoritative. Recognition is evidence only and never silently changes the Lab musical law.'
 });
-const BUILD_CLASS = 'WARBL Scala Fingering Lab v1.1 stable release';
+const BUILD_CLASS = 'WARBL Scala Fingering Lab v1.1 stable public release';
 const RC510_PROMOTION_NOTE = 'v1.1 promotes the physically preferred WARBL-only G3.2 Finger Commitment Envelope: raw topology remains degree authority, coherent evidence may accelerate arrival, and the internal reference voice pre-schedules the conservative 24→32 ms audible fallback on the Web Audio clock. Listening Space range is restored to 0–100% while Dry remains available. Harmonic Reed/P0.3 whisper response, RC5.11 rapid alternation, profile-safe yaw navigation, Scala-source authority, and external-receiver boundaries are preserved.';
 const PRIMARY_DISTRIBUTION = 'single self-contained HTML file';
 
@@ -5340,6 +5350,7 @@ function shouldRegisterServiceWorker() {
 
 
 /* ===== app.js ===== */
+/* v1.1 performance-witness alignment: observational layer only; no performance authority. */
 const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
 const MAX_CENTER_OPTIONS = 1024;
 const MAX_WHEEL_DEGREES = Number.POSITIVE_INFINITY; // audit.12c: exact source nodes are never omitted; labels remain adaptive/virtualized.
@@ -8777,22 +8788,105 @@ function reconcileLivePerformanceState(reason = 'update') {
   synchronizeLegacyLiveFields();
 }
 
+function normalizedWitnessNumber(value, fallback = 0) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : fallback;
+}
+
+function performanceWitnessSnapshot() {
+  // One-way observational boundary only: performance state -> witness snapshot -> views.
+  // Nothing in this object is permitted to feed fingering, G3.2 commitment, MIDI output, or audio authority.
+  const liveGate = Boolean(state.live?.noteGate);
+  const referenceGate = !liveGate && Boolean(state.synth?.active);
+  const source = liveGate ? 'warbl-live' : referenceGate ? 'reference-instrument' : 'idle';
+  const physicalDegreeKey = state.live?.physicalDegreeKey ?? null;
+  const mappedDegreeKey = state.live?.mappedDegreeKey ?? null;
+  const soundingDegreeKey = liveGate
+    ? (state.live?.soundingDegreeKey ?? state.soundingDegreeKey ?? null)
+    : (referenceGate ? (state.soundingDegreeKey ?? null) : (state.soundingDegreeKey ?? null));
+  const row = soundingDegreeKey == null ? null : mappingRowByKey(soundingDegreeKey);
+  // Nullish semantics are deliberate: a valid applied 0-cent value must stay 0 and must never fall through to raw bend.
+  const appliedExpressionCents = liveGate ? normalizedWitnessNumber(state.live?.appliedBendCents ?? 0, 0) : 0;
+  const soundingCenterCents = row ? normalizedWitnessNumber(row.performanceCents, 0) : null;
+  const livePitchCents = soundingCenterCents == null ? null : soundingCenterCents + appliedExpressionCents;
+  const centerFrequencyHz = row ? normalizedWitnessNumber(row.targetFrequencyHz, 0) : 0;
+  const visualFrequencyHz = centerFrequencyHz > 0 ? centerFrequencyHz * centsToRatio(appliedExpressionCents) : null;
+  const reportedFrequencyHz = liveGate && Number.isFinite(Number(state.live?.soundingFrequencyHz)) ? Number(state.live.soundingFrequencyHz)
+    : referenceGate && Number.isFinite(Number(state.synth?.current?.frequency)) ? Number(state.synth.current.frequency)
+      : null;
+  const residualCents = visualFrequencyHz && reportedFrequencyHz
+    ? 1200 * Math.log2(reportedFrequencyHz / visualFrequencyHz)
+    : null;
+  return Object.freeze({
+    source, gate: liveGate || referenceGate,
+    physicalDegreeKey, mappedDegreeKey, soundingDegreeKey,
+    soundingCenterCents, appliedExpressionCents, livePitchCents,
+    visualFrequencyHz, reportedFrequencyHz,
+    residualCents,
+    breath: normalizedWitnessNumber(state.breath ?? 0, 0),
+    timbre: normalizedWitnessNumber(state.live?.timbre74 ?? 0, 0),
+    channel: normalizedWitnessNumber(state.live?.sourceChannel ?? 1, 1),
+    note: state.live?.currentMidiNote ?? null,
+    velocity: normalizedWitnessNumber(state.live?.velocity ?? 0, 0)
+  });
+}
+
+function witnessDegreeText(degreeKey) {
+  if (degreeKey == null) return '—';
+  const row = mappingRowByKey(degreeKey) ?? sourceIdentityRows().find((item) => String(item.degreeKey) === String(degreeKey));
+  if (!row) return `key ${degreeKey}`;
+  const degree = row.isPeriodClosure ? 'P' : `D${Number(row.sourceDegreeIndex) + 1}`;
+  return `${degree} ${degreeDisplay(row)} @ ${Number(row.performanceCents).toFixed(3)}¢`;
+}
+
+function performanceWitnessStatusText(snapshot = performanceWitnessSnapshot()) {
+  const expression = snapshot.livePitchCents == null ? '—' : `${snapshot.livePitchCents.toFixed(3)}¢ (${snapshot.appliedExpressionCents >= 0 ? '+' : ''}${snapshot.appliedExpressionCents.toFixed(2)}¢)`;
+  return `Physical ${witnessDegreeText(snapshot.physicalDegreeKey)} · mapped ${witnessDegreeText(snapshot.mappedDegreeKey)} · sounding ${witnessDegreeText(snapshot.soundingDegreeKey)} · live pitch ${expression}`;
+}
+
+function updatePerformanceWitnessReadouts(snapshot = performanceWitnessSnapshot()) {
+  const text = performanceWitnessStatusText(snapshot);
+  const wheel = $('#wheelWitnessStatus');
+  if (wheel) wheel.innerHTML = `<strong>Performance witness:</strong> ${escapeUi(text)}`;
+  const mapping = $('#mappingWitnessStatus');
+  if (mapping) mapping.innerHTML = `<strong>Performance witness:</strong> ${escapeUi(text)}<br><small>Accent = sounding · green = physical · dashed blue = mapped candidate.</small>`;
+  const phrase = $('#phraseWitnessStatus');
+  if (phrase) phrase.innerHTML = `<strong>Performance witness:</strong> ${escapeUi(text)}<br><small>Phrase Y-position = sounding Scala center + applied expressive deviation.</small>`;
+}
+
+function mappingLiveFocusKey(snapshot = performanceWitnessSnapshot()) {
+  return snapshot.gate && snapshot.soundingDegreeKey != null ? snapshot.soundingDegreeKey : state.activeDegreeKey;
+}
+
 function updateMappingLiveHighlight() {
-  $$('#mappingBody tr').forEach((row) => row.classList.toggle('active-row', String(row.dataset.degreeKey) === String(state.activeDegreeKey)));
+  const witness = performanceWitnessSnapshot();
+  const focusKey = mappingLiveFocusKey(witness);
+  $$('#mappingBody tr').forEach((row) => {
+    const key = String(row.dataset.degreeKey ?? '');
+    row.classList.toggle('active-row', focusKey != null && key === String(focusKey));
+    row.classList.toggle('witness-physical', witness.physicalDegreeKey != null && key === String(witness.physicalDegreeKey));
+    row.classList.toggle('witness-mapped', witness.mappedDegreeKey != null && key === String(witness.mappedDegreeKey));
+    row.classList.toggle('witness-sounding', witness.gate && witness.soundingDegreeKey != null && key === String(witness.soundingDegreeKey));
+  });
+  updatePerformanceWitnessReadouts(witness);
 }
 
 function updateLiveStructuralHighlights() {
   synchronizeLegacyLiveFields();
+  const witness = performanceWitnessSnapshot();
   updateMappingLiveHighlight();
-  const soundingKey = state.soundingDegreeKey == null ? null : String(state.soundingDegreeKey);
-  const physicalKey = state.device.communicationMode && state.live.holeStateRevision > 0 && state.live.physicalDegreeKey != null ? String(state.live.physicalDegreeKey) : null;
+  const soundingKey = witness.gate && witness.soundingDegreeKey != null ? String(witness.soundingDegreeKey) : null;
+  const physicalKey = state.device.communicationMode && state.live.holeStateRevision > 0 && witness.physicalDegreeKey != null ? String(witness.physicalDegreeKey) : null;
+  const mappedKey = witness.mappedDegreeKey == null ? null : String(witness.mappedDegreeKey);
   $$('.wheel-degree').forEach((element) => {
     const key = String(element.dataset.degreeKey ?? '');
     const row = mappingRowByKey(key) ?? sourceIdentityRows().find((item) => String(item.degreeKey) === key) ?? null;
     const sounding = Boolean(row && soundingKey != null && String(row.degreeKey) === soundingKey && rowIsVisiblySounding(row));
     const physical = Boolean(row && physicalKey != null && String(row.degreeKey) === physicalKey);
+    const mapped = Boolean(row && mappedKey != null && String(row.degreeKey) === mappedKey);
     element.classList.toggle('sounding', sounding);
     element.classList.toggle('physical-observed', physical);
+    element.classList.toggle('mapped-candidate', mapped);
     const circle = element.querySelector('circle');
     if (circle) circle.setAttribute('r', String(sounding ? 9 : physical ? 7.5 : element.classList.contains('active') ? 7 : 4.5));
   });
@@ -8801,7 +8895,10 @@ function updateLiveStructuralHighlights() {
     const row = mappingRowByKey(key) ?? sourceIdentityRows().find((item) => String(item.degreeKey) === key) ?? null;
     const sounding = Boolean(row && soundingKey != null && String(row.degreeKey) === soundingKey && rowIsVisiblySounding(row));
     element.classList.toggle('sounding', sounding);
+    element.classList.toggle('physical-observed', physicalKey != null && key === physicalKey);
+    element.classList.toggle('mapped-candidate', mappedKey != null && key === mappedKey);
   });
+  updatePerformanceWitnessReadouts(witness);
   updateBreathVisuals();
 }
 
@@ -9273,8 +9370,10 @@ function renderWheel() {
   // interior field shape. This prevents ergonomic field recommendations from
   // silently deleting valid Scala degrees from the geometry.
   const sourceRows = sourceIdentityRows();
-  const active = sourceRows.find((row) => String(row.degreeKey) === String(state.activeDegreeKey))
-    ?? state.mapping.find((row) => String(row.degreeKey) === String(state.activeDegreeKey));
+  const witness = performanceWitnessSnapshot();
+  const visualFocusKey = mappingLiveFocusKey(witness);
+  const active = sourceRows.find((row) => String(row.degreeKey) === String(visualFocusKey))
+    ?? state.mapping.find((row) => String(row.degreeKey) === String(visualFocusKey));
   const targetVisible = practiceTargetVisible();
   const visualRows = selectVisualRows(sourceRows, MAX_WHEEL_DEGREES);
   const lanes = assignWheelLabelLanes(visualRows, period);
@@ -9323,7 +9422,8 @@ function renderWheel() {
     ? `<polygon class="wheel-field-shape" points="${fieldRows.map(({ phase }) => { const point = wheelPolarPoint(cx, cy, radius * .69, Math.PI / 2 - phase * Math.PI * 2); return `${point.x},${point.y}`; }).join(' ')}"></polygon>${fieldRows.map(({ phase }) => { const point = wheelPolarPoint(cx, cy, radius * .69, Math.PI / 2 - phase * Math.PI * 2); return `<circle class="wheel-field-node" cx="${point.x}" cy="${point.y}" r="2.5"></circle>`; }).join('')}`
     : '';
   const clusterKeys = new Set(clusterRows.map((row) => String(row.degreeKey)));
-  const physicalKey = state.device.communicationMode && state.live.holeStateRevision > 0 && state.live.physicalDegreeKey != null ? String(state.live.physicalDegreeKey) : null;
+  const physicalKey = state.device.communicationMode && state.live.holeStateRevision > 0 && witness.physicalDegreeKey != null ? String(witness.physicalDegreeKey) : null;
+  const mappedKey = witness.mappedDegreeKey != null ? String(witness.mappedDegreeKey) : null;
   const spokes = visualRows.map((row) => {
     const angle = Math.PI / 2 - (row.performanceCents / period) * Math.PI * 2;
     const { x, y } = wheelPolarPoint(cx, cy, radius, angle);
@@ -9333,15 +9433,16 @@ function renderWheel() {
     const isActive = active && String(active.degreeKey) === String(row.degreeKey);
     const isSounding = rowIsVisiblySounding(row);
     const isPhysical = physicalKey != null && String(row.degreeKey) === physicalKey;
+    const isMapped = mappedKey != null && String(row.degreeKey) === mappedKey;
     const isTarget = targetVisible && String(state.practice.target?.degreeKey) === String(row.degreeKey);
     const angularDistance = active ? wheelCircularDistance(row.performanceCents, active.performanceCents, period) : 0;
     const isDimmed = state.wheelFocusMode && active && !isActive && !isSounding && angularDistance > Math.max(90, period / 8);
-    const classes = ['wheel-degree', isActive ? 'active' : '', isSounding ? 'sounding' : '', isPhysical ? 'physical-observed' : '', isTarget ? 'practice-target' : '', isDimmed ? 'dimmed' : ''].filter(Boolean).join(' ');
+    const classes = ['wheel-degree', isActive ? 'active' : '', isSounding ? 'sounding' : '', isPhysical ? 'physical-observed' : '', isMapped ? 'mapped-candidate' : '', isTarget ? 'practice-target' : '', isDimmed ? 'dimmed' : ''].filter(Boolean).join(' ');
     const adaptiveStride = visualRows.length <= 12 ? 1 : Math.max(2, Math.ceil(visualRows.length / 8));
     const sourceIndex = Number(row.sourceDegreeIndex);
     const adaptiveLabel = adaptiveStride === 1 || row.isPeriodClosure || (Number.isFinite(sourceIndex) && sourceIndex % adaptiveStride === 0);
-    const requestedLabel = labelMode !== 'ondemand' ? adaptiveLabel : (isActive || isSounding || isPhysical || isTarget);
-    const showLabel = (requestedLabel || isActive || isSounding || isPhysical || isTarget) && !(showApertureFan && clusterKeys.has(String(row.degreeKey)));
+    const requestedLabel = labelMode !== 'ondemand' ? adaptiveLabel : (isActive || isSounding || isPhysical || isMapped || isTarget);
+    const showLabel = (requestedLabel || isActive || isSounding || isPhysical || isMapped || isTarget) && !(showApertureFan && clusterKeys.has(String(row.degreeKey)));
     return `<g class="${classes}" data-degree-key="${row.degreeKey}" tabindex="0" role="button" aria-label="Degree ${row.degreeKey}, ${degreeDisplay(row)}">
       <line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"></line>
       <circle cx="${x}" cy="${y}" r="${isSounding ? 9 : isPhysical ? 7.5 : isActive ? 7 : 4.5}"></circle>
@@ -9365,6 +9466,7 @@ function renderWheel() {
     element.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') activate(); });
   });
   renderWheelCluster(active, visualRows);
+  updatePerformanceWitnessReadouts(witness);
 }
 
 function apertureSvg(row, size = 42) {
@@ -9415,10 +9517,19 @@ function fingeringDots(bits, variant = '', identityMode = 'full') {
 }
 
 function renderActiveDegree() {
-  const row = state.mapping.find((item) => String(item.degreeKey) === String(state.activeDegreeKey)) ?? state.mapping[0];
+  const witness = performanceWitnessSnapshot();
+  // Public v1.1 visual-authority invariant: while a note is sounding, the primary
+  // musical identity follows soundingDegreeKey. Physical/mapped candidates remain
+  // secondary witnesses and must never make this panel imply that a candidate is
+  // already the audible carrier. Editing selection continues to use activeDegreeKey
+  // when no live/reference note is sounding.
+  const presentationKey = witness.gate && witness.soundingDegreeKey != null ? witness.soundingDegreeKey : state.activeDegreeKey;
+  const row = state.mapping.find((item) => String(item.degreeKey) === String(presentationKey))
+    ?? sourceIdentityRows().find((item) => String(item.degreeKey) === String(presentationKey))
+    ?? state.mapping[0];
   if (!row) return;
   $('#activeAperture').innerHTML = apertureSvg(row, 98);
-  $('#activeDegreeTitle').textContent = `${row.isPeriodClosure ? 'Period closure' : `Degree ${Number(row.sourceDegreeIndex) + 1}`} — ${degreeDisplay(row)}`;
+  $('#activeDegreeTitle').textContent = `${witness.gate ? 'Sounding · ' : ''}${row.isPeriodClosure ? 'Period closure' : `Degree ${Number(row.sourceDegreeIndex) + 1}`} — ${degreeDisplay(row)}`;
   $('#activeDegreeMeta').textContent = row.isPeriodClosure
     ? `${formatCents(row.performanceCents)} · ${row.targetFrequencyHz.toFixed(4)} Hz · repeats the selected center one period higher`
     : `${formatCents(row.performanceCents)} · ${row.targetFrequencyHz.toFixed(4)} Hz`;
@@ -9429,7 +9540,7 @@ function renderActiveDegree() {
     $('#activeFingering').innerHTML = `${fingeringDots(row.fingeringBits, 'active', 'full')} <span>${row.fingeringLabel}${row.fingeringOrigin === 'generated-extension' ? ' · generated extension' : ''}</span>`;
     $('#activeMidi').textContent = `MIDI ${row.midiAnchor} ${formatCents(row.bendCents, 3)} static correction`;
   }
-  $('#activeRationale').textContent = `${row.rationale} Access: ${accessClassLabel(row.accessClass)} — ${row.accessExplanation}`;
+  $('#activeRationale').textContent = `${row.rationale} Access: ${accessClassLabel(row.accessClass)} — ${row.accessExplanation}${witness.gate ? ' Live authority: this panel follows the sounding degree; physical and mapped candidates remain secondary witnesses.' : ''}`;
 }
 
 function fingeringIsolationPenalty(bits) {
@@ -9509,7 +9620,7 @@ function renderMappingTable() {
     .map((row) => [row.fingeringId, { id: row.fingeringId, label: row.fingeringLabel, bits: row.fingeringBits }])).values()];
   tbody.innerHTML = visibleRows.map((row) => {
     const inActiveField = activeKeys.has(String(row.degreeKey));
-    if (row.isPeriodClosure) return `<tr data-degree-key="${row.degreeKey}" class="period-closure-row ${String(row.degreeKey) === String(state.activeDegreeKey) ? 'active-row' : ''}">
+    if (row.isPeriodClosure) return `<tr data-degree-key="${row.degreeKey}" class="period-closure-row ${String(row.degreeKey) === String(mappingLiveFocusKey()) ? 'active-row' : ''}">
       <td><button class="degree-button" data-action="audition" title="Sound the period closure with the listening/audition engine">${apertureSvg(row, 38)}<span>P</span></button></td>
       <td><strong>${sourceIdentityDisplay(row)}</strong><small>${formatCents(sourceIdentityCents(row))} · repeats 1/1 one period higher</small></td>
       <td colspan="3"><strong>Structural reference only</strong><small>No independent fingering, MIDI anchor, or playable-field capacity is consumed.</small></td>
@@ -9521,7 +9632,7 @@ function renderMappingTable() {
     const accessExplanation = inActiveField
       ? (activeRow?.accessExplanation ?? row.accessExplanation ?? '')
       : 'Source degree remains authoritative but is outside the current active playable field.';
-    return `<tr data-degree-key="${row.degreeKey}" class="${String(row.degreeKey) === String(state.activeDegreeKey) ? 'active-row' : ''} ${inActiveField ? 'in-active-field' : 'outside-active-field'}">
+    return `<tr data-degree-key="${row.degreeKey}" class="${String(row.degreeKey) === String(mappingLiveFocusKey()) ? 'active-row' : ''} ${inActiveField ? 'in-active-field' : 'outside-active-field'}">
       <td><button class="degree-button" data-action="audition" title="Audition exact pitch">${apertureSvg(row, 38)}<span>${Number(row.sourceDegreeIndex) + 1}</span></button></td>
       <td><strong>${sourceIdentityDisplay(row)}</strong><small>${formatCents(sourceIdentityCents(row))}</small></td>
       <td><select data-field="fingeringId" aria-label="Fingering for degree ${row.degreeKey}">${editableFingerings.map((fingering) => `<option value="${fingering.id}" ${fingering.id === row.fingeringId ? 'selected' : ''}>${fingering.label}</option>`).join('')}</select>${fingeringDots(row.fingeringBits)}<small>${row.fingeringOrigin === 'generated-extension' ? 'Generated extension state; not a historical lineage claim.' : 'Lineage-native/core state.'}</small></td>
@@ -9533,6 +9644,7 @@ function renderMappingTable() {
     </tr>`;
   }).join('');
 
+  updateMappingLiveHighlight();
   tbody.querySelectorAll('tr').forEach((tr) => {
     const key = tr.dataset.degreeKey;
     tr.querySelector('[data-action="audition"]')?.addEventListener('click', () => { state.activeDegreeKey = key; auditionDegree(key); renderAll(); });
@@ -9577,7 +9689,8 @@ function notationSourceRows() {
   const source = sourceIdentityRows();
   if (state.notationScopeMode === 'active-field') return state.mapping;
   if (state.notationScopeMode === 'focus') {
-    const activeKey = state.soundingDegreeKey ?? state.activeDegreeKey;
+    const notationWitness = performanceWitnessSnapshot();
+  const activeKey = mappingLiveFocusKey(notationWitness);
     let center = source.findIndex((row) => String(row.degreeKey) === String(activeKey));
     if (center < 0) center = 0;
     const start = Math.max(0, center - 4);
@@ -9740,7 +9853,8 @@ function renderNotation() {
   const spacing = 14;
   const targetVisible = practiceTargetVisible();
   const revealTargetFingering = shouldRevealPracticeFingering();
-  const activeKey = state.soundingDegreeKey ?? state.activeDegreeKey;
+  const notationWitness = performanceWitnessSnapshot();
+  const activeKey = mappingLiveFocusKey(notationWitness);
   const systemModels = systems.map((rows) => {
     const gap = (staffW - 125) / Math.max(1, rows.length - 1);
     const xPositions = rows.map((_, index) => staffX + 95 + index * gap);
@@ -9766,14 +9880,16 @@ function renderNotation() {
       const x = xPositions[index];
       const y = noteY(row);
       const isSounding = rowIsVisiblySounding(row);
-      const isActive = String(row.degreeKey) === String(state.activeDegreeKey);
+      const isActive = String(row.degreeKey) === String(activeKey);
+      const isPhysical = notationWitness.physicalDegreeKey != null && String(row.degreeKey) === String(notationWitness.physicalDegreeKey);
+      const isMapped = notationWitness.mappedDegreeKey != null && String(row.degreeKey) === String(notationWitness.mappedDegreeKey);
       const isTarget = targetVisible && String(state.practice.target?.degreeKey) === String(row.degreeKey);
       const activeIndex = rows.findIndex((candidate) => String(candidate.degreeKey) === String(activeKey));
       const distance = activeIndex < 0 ? 0 : Math.abs(index - activeIndex);
       const focusClass = state.notationScopeMode === 'focus' || mode === 'neighborhood'
         ? distance === 0 ? '' : distance <= 2 ? 'neighbor' : 'dimmed'
         : '';
-      const classes = ['notation-degree', isSounding ? 'sounding' : '', isActive ? 'active' : '', isTarget ? 'practice-target' : '', row.isPeriodClosure ? 'period-closure' : '', focusClass].filter(Boolean).join(' ');
+      const classes = ['notation-degree', isSounding ? 'sounding' : '', isActive ? 'active' : '', isPhysical ? 'physical-observed' : '', isMapped ? 'mapped-candidate' : '', isTarget ? 'practice-target' : '', row.isPeriodClosure ? 'period-closure' : '', focusClass].filter(Boolean).join(' ');
       const haloRadius = isSounding ? 10 + state.breath * 16 : 8;
       const showCents = identityMode !== 'ratio';
       const showSource = identityMode !== 'cents';
@@ -9842,10 +9958,13 @@ function renderNotation() {
     }
   }
   const liveStatus = $('#notationLiveStatus');
-  if (state.soundingDegreeKey && rowIsVisiblySounding(fullSource.find((row) => String(row.degreeKey) === String(state.soundingDegreeKey)) ?? {})) {
-    const sounding = fullSource.find((row) => String(row.degreeKey) === String(state.soundingDegreeKey));
-    liveStatus.textContent = sounding ? `Sounding ${degreeDisplay(sounding)} · breath ${Math.round(state.breath * 100)}%` : 'A mapped note is sounding.';
-  } else liveStatus.textContent = state.practice.phase === 'listening' ? 'Listen, then find the target on WARBL.' : 'Play a mapped note to illuminate the preview.';
+  const witnessStatus = performanceWitnessSnapshot();
+  if (liveStatus && witnessStatus.gate && witnessStatus.soundingDegreeKey != null) {
+    const sounding = fullSource.find((row) => String(row.degreeKey) === String(witnessStatus.soundingDegreeKey));
+    liveStatus.textContent = sounding
+      ? `Sounding ${degreeDisplay(sounding)} @ ${Number(sounding.performanceCents).toFixed(3)}¢ · live ${witnessStatus.livePitchCents?.toFixed(3) ?? '—'}¢ · deviation ${witnessStatus.appliedExpressionCents >= 0 ? '+' : ''}${witnessStatus.appliedExpressionCents.toFixed(2)}¢ · breath ${Math.round(witnessStatus.breath * 100)}%`
+      : 'A mapped note is sounding.';
+  } else if (liveStatus) liveStatus.textContent = state.practice.phase === 'listening' ? 'Listen, then find the target on WARBL.' : 'Play a mapped note to illuminate the preview.';
   updateBreathVisuals();
 }
 
@@ -9868,10 +9987,12 @@ function updateBreathVisuals() {
     halo.style.opacity = isSounding ? String(0.18 + state.breath * 0.55) : '0';
   });
   const status = $('#notationLiveStatus');
-  if (status && state.soundingDegreeKey && state.soundingContext !== 'practice-target') {
-    const row = state.mapping.find((item) => String(item.degreeKey) === String(state.soundingDegreeKey));
-    if (row) status.textContent = `Sounding ${degreeDisplay(row)} · breath ${Math.round(state.breath * 100)}%`;
+  const witness = performanceWitnessSnapshot();
+  if (status && witness.gate && witness.soundingDegreeKey != null && state.soundingContext !== 'practice-target') {
+    const row = mappingRowByKey(witness.soundingDegreeKey);
+    if (row) status.textContent = `Sounding ${degreeDisplay(row)} @ ${Number(row.performanceCents).toFixed(3)}¢ · live ${witness.livePitchCents?.toFixed(3) ?? '—'}¢ · deviation ${witness.appliedExpressionCents >= 0 ? '+' : ''}${witness.appliedExpressionCents.toFixed(2)}¢ · breath ${Math.round(witness.breath * 100)}%`;
   }
+  updatePerformanceWitnessReadouts(witness);
 }
 
 function renderValidation() {
@@ -10348,12 +10469,12 @@ function playbackVoiceDescription() {
   return state.referenceInstrument === 'pipe-coupled'
     ? 'Coupled Bore experiment. Exact Scala pitch is preserved while breath primarily excites pressure-recruited modes; synthetic rooms and embedded XenQuill IR convolution remain optional.'
     : state.referenceInstrument === 'pipe'
-      ? 'Reference Pipe physical-model candidate. Exact Scala pitch drives a persistent tonal exciter and six-mode bore resonator; Dry, synthetic rooms, and embedded XenQuill IRs are shared Listening Spaces.'
+      ? 'Reference Pipe experimental physical model. Exact Scala pitch drives a persistent tonal exciter and six-mode bore resonator; Dry, synthetic rooms, and embedded XenQuill IRs are shared Listening Spaces.'
       : state.referenceInstrument === 'harmonic-reed'
         ? 'Harmonic Reed performer reference. Exact Scala f0 drives a saw fundamental plus octave sine; P0.3 whisper emergence and breath awakening affect only this internal voice.'
         : state.referenceInstrument === 'sine'
           ? 'Pure Sine measurement control. Exact Scala f0 with raw breath amplitude and minimal spectral interpretation.'
-          : 'Frozen dev.2.1.2 exact-frequency Reference Voice. This is the known-good A/B control; shared Listening Space is optional.';
+          : 'Known-stable exact-frequency Reference Voice. This is the A/B comparison control; shared Listening Space is optional.';
 }
 
 function renderReferenceInstrument() {
@@ -11811,9 +11932,21 @@ function clearPhraseShape(){
   const {bg,overlay}=phraseShapeCanvases();[bg,overlay].forEach(canvas=>{if(canvas){const ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);}}); if(bg){const ctx=bg.getContext('2d');ctx.fillStyle='#050607';ctx.fillRect(0,0,bg.width,bg.height);} const status=$('#phraseShapeStatus');if(status)status.textContent='Ready. Play the internal Reference Instrument or run the short demo.';renderPhraseLayerControls();renderPhraseEventLedger([]);
 }
 function pushPhraseSample(){
-  const now=performance.now();if(now-Number(state.phraseShape.lastSampleAt||0)<24)return;state.phraseShape.lastSampleAt=now;const row=mappingRowByKey(state.live.soundingDegreeKey??state.soundingDegreeKey);const frequency=Number(state.live.soundingFrequencyHz??row?.targetFrequencyHz??state.synth.current?.frequency??0);
-  // A stale degree label is never enough to keep the visualizer gated. Actual live input or an active internal reference voice is required.
-  const gate=Boolean(state.live.noteGate||state.synth.active); state.phraseShape.samples.push({t:now,frequency:gate?frequency:0,breath:Number(state.breath||0),timbre:Number(state.live.timbre74||0),degreeKey:row?.degreeKey??null,bend:Number(state.live.appliedBendCents||state.expressiveBendCents||0),channel:Number(state.live.sourceChannel||1),note:state.live.currentMidiNote,velocity:Number(state.live.velocity||0),gate});state.phraseShape.samples=state.phraseShape.samples.filter(item=>now-item.t<=phraseWindowMs()).slice(-900);
+  const now=performance.now();if(now-Number(state.phraseShape.lastSampleAt||0)<24)return;state.phraseShape.lastSampleAt=now;
+  const witness=performanceWitnessSnapshot();
+  const row=witness.soundingDegreeKey==null?null:mappingRowByKey(witness.soundingDegreeKey);
+  const gate=Boolean(witness.gate);
+  const frequency=gate?Number(witness.visualFrequencyHz??witness.reportedFrequencyHz??row?.targetFrequencyHz??state.synth.current?.frequency??0):0;
+  state.phraseShape.samples.push({t:now,frequency,visualFrequencyHz:frequency,soundingCenterCents:witness.soundingCenterCents,livePitchCents:witness.livePitchCents,breath:witness.breath,timbre:witness.timbre,degreeKey:row?.degreeKey??null,bend:witness.appliedExpressionCents,channel:witness.channel,note:witness.note,velocity:witness.velocity,gate,source:witness.source});
+  state.phraseShape.samples=state.phraseShape.samples.filter(item=>now-item.t<=phraseWindowMs()).slice(-900);
+  updatePerformanceWitnessReadouts(witness);
+}
+function phraseWitnessFrequency(sample){
+  if(!sample)return 0;
+  const cents=Number(sample.livePitchCents);
+  if(Number.isFinite(cents))return phraseFrequencyRange().center*centsToRatio(cents);
+  const visual=Number(sample.visualFrequencyHz);
+  return Number.isFinite(visual)&&visual>0?visual:Number(sample.frequency||0);
 }
 function drawPhraseSpectrogramColumn(){
   const {bg}=phraseShapeCanvases();const analyser=state.synth.analyser;if(!bg)return;const ctx=bg.getContext('2d');ctx.drawImage(bg,-2,0);ctx.fillStyle='#050607';ctx.fillRect(bg.width-2,0,2,bg.height);if(!analyser)return;const range=phraseFrequencyRange();const bins=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(bins);const nyquist=(state.synth.context?.sampleRate||48000)/2;for(let y=0;y<bg.height;y+=2){const f=range.low*Math.pow(range.high/range.low,(bg.height-y)/bg.height);const index=Math.max(0,Math.min(bins.length-1,Math.round(f/nyquist*bins.length)));const v=bins[index]/255;if(v<.035)continue;const a=Math.min(.72,v*1.05),tone=Math.round(118+118*v);ctx.fillStyle=`rgba(${tone},${Math.round(86+92*v)},${Math.round(52+56*v)},${a})`;ctx.fillRect(bg.width-2,y,2,2);}
@@ -11923,7 +12056,7 @@ function phraseNarrativeForms(force=false){
   return state.phraseShape.narrativeForms||[];
 }
 function drawApertureForm(ctx,form,xFor,height){
-  const pts=form.samples;if(pts.length<2)return;const e=form.evidence;const sampleAt=f=>pts[Math.max(0,Math.min(pts.length-1,Math.round((pts.length-1)*f)))];const anchors=[sampleAt(0),sampleAt(.25),sampleAt(.5),sampleAt(.75),sampleAt(1)].map(s=>({x:xFor(s.t),y:phraseFrequencyToY(s.frequency,height),p:Math.max(0,Math.min(1,s.breath||0))}));
+  const pts=form.samples;if(pts.length<2)return;const e=form.evidence;const sampleAt=f=>pts[Math.max(0,Math.min(pts.length-1,Math.round((pts.length-1)*f)))];const anchors=[sampleAt(0),sampleAt(.25),sampleAt(.5),sampleAt(.75),sampleAt(1)].map(s=>({x:xFor(s.t),y:phraseFrequencyToY(phraseWitnessFrequency(s),height),p:Math.max(0,Math.min(1,s.breath||0))}));
   ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.setLineDash(form.provisional?[7,8]:[]);ctx.strokeStyle=form.provisional?'rgba(218,230,225,.15)':'rgba(218,230,225,.23)';ctx.lineWidth=4+e.pressureMean*9;ctx.beginPath();ctx.moveTo(anchors[0].x,anchors[0].y);for(let i=1;i<anchors.length-1;i+=1){const midX=(anchors[i].x+anchors[i+1].x)/2,midY=(anchors[i].y+anchors[i+1].y)/2;ctx.quadraticCurveTo(anchors[i].x,anchors[i].y,midX,midY);}ctx.quadraticCurveTo(anchors.at(-2).x,anchors.at(-2).y,anchors.at(-1).x,anchors.at(-1).y);ctx.stroke();
   ctx.setLineDash(form.provisional?[3,7]:[]);ctx.strokeStyle=form.provisional?'rgba(235,243,240,.28)':'rgba(235,243,240,.42)';ctx.lineWidth=1;ctx.stroke();
   // The canvas carries only a neutral provenance handle, not a verbal label. The broad form should read like a word in context rather than spelling itself out during performance.
@@ -11934,15 +12067,15 @@ function renderPhraseEventLedger(forms=phraseNarrativeForms()){
 }
 
 function drawPhraseCurrentMpe(ctx,sample,width,height){
-  if(!sample?.gate||!sample.frequency)return;const ruler=phraseRulerWidth(width),row=mappingRowByKey(sample.degreeKey),degree=row?phraseExactDegreeLabel(row):'degree —';const lines=[`MPE ch ${sample.channel||1} · note ${sample.note??'—'} · vel ${sample.velocity??0}`,`bend ${Number(sample.bend)>=0?'+':''}${Number(sample.bend||0).toFixed(1)}¢ · pressure ${Number(sample.breath||0).toFixed(2)} · CC74 ${Number(sample.timbre||0).toFixed(2)}`,degree];ctx.save();ctx.font='9px ui-monospace,SFMono-Regular,Menlo,monospace';const w=Math.max(...lines.map(x=>ctx.measureText(x).width))+16,h=47,x=Math.max(ruler+8,width-w-10),y=9;ctx.fillStyle='rgba(2,4,5,.78)';ctx.fillRect(x,y,w,h);ctx.strokeStyle='rgba(255,255,255,.16)';ctx.strokeRect(x+.5,y+.5,w-1,h-1);lines.forEach((line,i)=>{ctx.fillStyle=i===2?'rgba(255,231,190,.89)':'rgba(238,243,241,.82)';ctx.fillText(line,x+8,y+13+i*13);});ctx.restore();
+  if(!sample?.gate||!phraseWitnessFrequency(sample))return;const ruler=phraseRulerWidth(width),row=mappingRowByKey(sample.degreeKey),degree=row?phraseExactDegreeLabel(row):'degree —';const lines=[`MPE ch ${sample.channel||1} · note ${sample.note??'—'} · vel ${sample.velocity??0}`,`deviation ${Number(sample.bend)>=0?'+':''}${Number(sample.bend??0).toFixed(1)}¢ · live ${Number(sample.livePitchCents).toFixed(3)}¢ · pressure ${Number(sample.breath||0).toFixed(2)} · CC74 ${Number(sample.timbre||0).toFixed(2)}`,degree];ctx.save();ctx.font='9px ui-monospace,SFMono-Regular,Menlo,monospace';const w=Math.max(...lines.map(x=>ctx.measureText(x).width))+16,h=47,x=Math.max(ruler+8,width-w-10),y=9;ctx.fillStyle='rgba(2,4,5,.78)';ctx.fillRect(x,y,w,h);ctx.strokeStyle='rgba(255,255,255,.16)';ctx.strokeRect(x+.5,y+.5,w-1,h-1);lines.forEach((line,i)=>{ctx.fillStyle=i===2?'rgba(255,231,190,.89)':'rgba(238,243,241,.82)';ctx.fillText(line,x+8,y+13+i*13);});ctx.restore();
 }
 function drawPhraseOverlay(){
   const {overlay}=phraseShapeCanvases();if(!overlay)return;const ctx=overlay.getContext('2d');ctx.clearRect(0,0,overlay.width,overlay.height);drawPhraseScaleStrata(ctx,overlay.width,overlay.height);const samples=state.phraseShape.samples;if(!samples.length){renderPhraseLayerControls();return;}const now=performance.now(),windowMs=phraseWindowMs(),ruler=phraseRulerWidth(overlay.width),plotLeft=ruler+8,xFor=t=>plotLeft+(now-t<=windowMs?(1-(now-t)/windowMs):0)*(overlay.width-plotLeft-8);
   const forms=phraseNarrativeForms();if(state.phraseShape.showSymbols){for(const form of forms)drawApertureForm(ctx,form,xFor,overlay.height);}
   // Exact MPE pitch trajectory. Pressure is measured and controls thickness; no narrative meaning is assigned here.
-  let previous=null;for(const sample of samples){if(!sample.gate||!sample.frequency){previous=null;continue;}if(previous&&previous.gate&&previous.frequency){const x0=xFor(previous.t),y0=phraseFrequencyToY(previous.frequency,overlay.height),x1=xFor(sample.t),y1=phraseFrequencyToY(sample.frequency,overlay.height),pressure=Math.max(0,Math.min(1,(Number(previous.breath||0)+Number(sample.breath||0))/2));ctx.strokeStyle=`rgba(255,255,255,${(.68+.30*pressure).toFixed(3)})`;ctx.lineWidth=1.15+pressure*3.25;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}previous=sample;}
-  if(state.phraseShape.showStrata){const transitions=phraseDegreeTransitions(samples).filter(t=>now-t.t<=windowMs).slice(-16);let lastRight=plotLeft-999;for(const t of transitions){if(!t.row||!t.frequency)continue;const x=xFor(t.t),y=phraseFrequencyToY(t.frequency,overlay.height);const label=phraseExactDegreeLabel(t.row),detail=`dev ${Number(t.bend||0)>=0?'+':''}${Number(t.bend||0).toFixed(1)}¢ · P ${Number(t.breath||0).toFixed(2)}${Number(t.timbre||0)>0?` · CC74 ${Number(t.timbre||0).toFixed(2)}`:''}`;ctx.font='600 10px system-ui';const tw=Math.max(ctx.measureText(label).width,ctx.measureText(detail).width);let lx=Math.max(plotLeft,Math.min(overlay.width-tw-16,x+7));if(lx<lastRight+8)continue;const boxH=state.phraseShape.showDeviation?31:18,ly=Math.max(boxH+3,Math.min(overlay.height-8,y-11));ctx.fillStyle='rgba(4,5,6,.84)';ctx.fillRect(lx-5,ly-boxH+3,tw+10,boxH);ctx.strokeStyle='rgba(245,220,174,.50)';ctx.strokeRect(lx-5+.5,ly-boxH+3.5,tw+9,boxH-1);ctx.fillStyle='rgba(255,238,208,.96)';ctx.fillText(label,lx,ly-(state.phraseShape.showDeviation?11:0));if(state.phraseShape.showDeviation){ctx.font='9px ui-monospace,SFMono-Regular,Menlo,monospace';ctx.fillStyle='rgba(207,225,226,.91)';ctx.fillText(detail,lx,ly+1);}ctx.fillStyle='rgba(255,245,225,.98)';ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fill();lastRight=lx+tw;}}
-  drawPhraseCurrentMpe(ctx,samples.filter(s=>s.gate&&s.frequency).at(-1),overlay.width,overlay.height);renderPhraseEventLedger(forms);
+  let previous=null;for(const sample of samples){const sampleFrequency=phraseWitnessFrequency(sample);if(!sample.gate||!sampleFrequency){previous=null;continue;}if(previous&&previous.gate&&phraseWitnessFrequency(previous)){const x0=xFor(previous.t),y0=phraseFrequencyToY(phraseWitnessFrequency(previous),overlay.height),x1=xFor(sample.t),y1=phraseFrequencyToY(sampleFrequency,overlay.height),pressure=Math.max(0,Math.min(1,(Number(previous.breath||0)+Number(sample.breath||0))/2));ctx.strokeStyle=`rgba(255,255,255,${(.68+.30*pressure).toFixed(3)})`;ctx.lineWidth=1.15+pressure*3.25;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}previous=sample;}
+  if(state.phraseShape.showStrata){const transitions=phraseDegreeTransitions(samples).filter(t=>now-t.t<=windowMs).slice(-16);let lastRight=plotLeft-999;for(const t of transitions){if(!t.row||!phraseWitnessFrequency(t))continue;const x=xFor(t.t),y=phraseFrequencyToY(phraseWitnessFrequency(t),overlay.height);const label=phraseExactDegreeLabel(t.row),detail=`dev ${Number(t.bend||0)>=0?'+':''}${Number(t.bend||0).toFixed(1)}¢ · P ${Number(t.breath||0).toFixed(2)}${Number(t.timbre||0)>0?` · CC74 ${Number(t.timbre||0).toFixed(2)}`:''}`;ctx.font='600 10px system-ui';const tw=Math.max(ctx.measureText(label).width,ctx.measureText(detail).width);let lx=Math.max(plotLeft,Math.min(overlay.width-tw-16,x+7));if(lx<lastRight+8)continue;const boxH=state.phraseShape.showDeviation?31:18,ly=Math.max(boxH+3,Math.min(overlay.height-8,y-11));ctx.fillStyle='rgba(4,5,6,.84)';ctx.fillRect(lx-5,ly-boxH+3,tw+10,boxH);ctx.strokeStyle='rgba(245,220,174,.50)';ctx.strokeRect(lx-5+.5,ly-boxH+3.5,tw+9,boxH-1);ctx.fillStyle='rgba(255,238,208,.96)';ctx.fillText(label,lx,ly-(state.phraseShape.showDeviation?11:0));if(state.phraseShape.showDeviation){ctx.font='9px ui-monospace,SFMono-Regular,Menlo,monospace';ctx.fillStyle='rgba(207,225,226,.91)';ctx.fillText(detail,lx,ly+1);}ctx.fillStyle='rgba(255,245,225,.98)';ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fill();lastRight=lx+tw;}}
+  drawPhraseCurrentMpe(ctx,samples.filter(s=>s.gate&&phraseWitnessFrequency(s)).at(-1),overlay.width,overlay.height);renderPhraseEventLedger(forms);
 }
 function phraseShapeFrame(timestamp=performance.now()){
   state.phraseShape.frame=null;
@@ -15856,7 +15989,10 @@ const laboratoryDebug = {
   getWarblReadTransport: () => ({communicationMode:state.device.communicationMode,requested:state.device.communicationRequested,transaction:state.device.readTransactionActive,sensorMonitorActive:state.device.sensorMonitorActive,hasReceivedState:state.device.hasReceivedState}),
   getWarblWitnessView: () => ({ inactive:$('#warblWitness')?.classList.contains('inactive') ?? true, snapshotState:$('#warblWitness')?.dataset.snapshotState ?? 'none', overlayHidden:Boolean($('#warblWitnessInactive')?.hidden), summary:$('#warblDeviceSummary')?.textContent ?? '', tone:$('#warblToneState')?.textContent ?? '', pressure:$('#warblPressure')?.textContent ?? '' }),
   getPitchGeometryAudit: () => ({ sourceCount:(state.fieldWorkspace.sourceMapping.length ? state.fieldWorkspace.sourceMapping : state.mapping).length, activeFieldCount:state.mapping.length, renderedCount:$$('#scaleWheel .wheel-degree').length, renderedKeys:$$('#scaleWheel .wheel-degree').map(el=>el.dataset.degreeKey), fieldKeys:[...activeFieldDegreeKeys()] }),
-  getPitchGeometryLiveMarkers: () => ({ physicalDegreeKey: state.live.physicalDegreeKey ?? null, soundingDegreeKey: state.live.soundingDegreeKey ?? null, physicalMarkedKeys:$$('#scaleWheel .wheel-degree.physical-observed').map(el=>el.dataset.degreeKey), soundingMarkedKeys:$$('#scaleWheel .wheel-degree.sounding').map(el=>el.dataset.degreeKey) }),
+  getPerformanceWitnessSnapshot: () => structuredCloneSafe(performanceWitnessSnapshot()),
+  getVisualWitnessDomState: () => ({ wheel:{physical:$$('#scaleWheel .wheel-degree.physical-observed').map(el=>el.dataset.degreeKey),mapped:$$('#scaleWheel .wheel-degree.mapped-candidate').map(el=>el.dataset.degreeKey),sounding:$$('#scaleWheel .wheel-degree.sounding').map(el=>el.dataset.degreeKey)}, mapping:{physical:$$('#mappingBody tr.witness-physical').map(el=>el.dataset.degreeKey),mapped:$$('#mappingBody tr.witness-mapped').map(el=>el.dataset.degreeKey),sounding:$$('#mappingBody tr.witness-sounding').map(el=>el.dataset.degreeKey)}, notation:{physical:$$('#notationSvg .notation-degree.physical-observed').map(el=>el.dataset.degreeKey),mapped:$$('#notationSvg .notation-degree.mapped-candidate').map(el=>el.dataset.degreeKey),sounding:$$('#notationSvg .notation-degree.sounding').map(el=>el.dataset.degreeKey)} }),
+  runVisualWitnessAlignmentRegression: () => { const height=380, range=phraseFrequencyRange(), rows=sourceIdentityRows().filter(row=>!row.isPeriodClosure); const checks=rows.map(row=>{const cents=Number(row.performanceCents),scalaFrequency=range.center*centsToRatio(cents),witnessFrequency=range.center*centsToRatio(cents+0),scalaY=phraseFrequencyToY(scalaFrequency,height),witnessY=phraseFrequencyToY(witnessFrequency,height);return{degreeKey:row.degreeKey,cents,scalaY,witnessY,errorPx:Math.abs(scalaY-witnessY)};}); const maxErrorPx=checks.length?Math.max(...checks.map(item=>item.errorPx)):0; return {pass:maxErrorPx<1e-9,maxErrorPx,count:checks.length,zeroBendPreserved:(0??37)===0,formula:'livePitchCents = soundingCenterCents + appliedExpressionCents',checks}; },
+  getPitchGeometryLiveMarkers: () => ({ ...structuredCloneSafe(performanceWitnessSnapshot()), physicalMarkedKeys:$$('#scaleWheel .wheel-degree.physical-observed').map(el=>el.dataset.degreeKey), mappedMarkedKeys:$$('#scaleWheel .wheel-degree.mapped-candidate').map(el=>el.dataset.degreeKey), soundingMarkedKeys:$$('#scaleWheel .wheel-degree.sounding').map(el=>el.dataset.degreeKey) }),
   getConnectionUi: () => ({ midi:$('#midiConnection')?.textContent ?? '', sensors:$('#sensorConnection')?.textContent ?? '', connectButton:$('#connectMidi')?.textContent ?? '', monitorButton:$('#toggleSensorMonitor')?.textContent ?? '' }),
   getAuthorityUi: () => ({ source:state.controllerProfile.performancePitchSource, status:$('#performanceSourceStatus')?.textContent ?? '', automatic:$('#automaticAuthorityAuthority')?.textContent ?? '', mpeWitness:$('#mpeWitnessState')?.textContent ?? '', blockReason:state.live.outputBlockedReason ?? null }),
   getBlockingUiBoundary: () => ({ active:Boolean(state.midiDiagnostics.blockingUiActive), reason:state.midiDiagnostics.blockingUiReason ?? null, ignoreMidiEventBefore:Number(state.midiDiagnostics.ignoreMidiEventBefore || 0), requiresFreshState:Boolean(state.live.requiresFreshState) }),
@@ -15878,7 +16014,7 @@ const laboratoryDebug = {
   getPhraseShape: () => structuredCloneSafe({samples:state.phraseShape.samples,forms:phraseNarrativeForms(true),events:state.phraseShape.events,layers:phraseLayerState(),strata:phraseScaleStrata(),transitions:phraseDegreeTransitions()}),
   getPhraseEvidenceEvents: () => structuredCloneSafe(state.phraseShape.events),
   getPhraseExactDegreeLabel: (degreeKey=state.activeDegreeKey) => phraseExactDegreeLabel(mappingRowByKey(degreeKey)),
-  simulateAperturePhrase: () => { const rows=state.mapping.filter(r=>!r.isPeriodClosure); if(rows.length<3)return null; const now=performance.now(), seq=[0,1,2,2,2,1,0,1,2,1,0], samples=[];state.phraseShape.events=[];state.phraseShape.eventSeq=0;const bendRange=Math.max(2,Number(effectiveIncomingBendRange().semitones)||48);for(let i=0;i<132;i+=1){const phase=i/131,idx=seq[Math.min(seq.length-1,Math.floor(phase*seq.length))]%rows.length,row=rows[idx],t=now-14800+i*(14800/131),bend=11*Math.sin(i*.58)+(i>55&&i<86?9*Math.sin(i*1.2):0),pressure=Math.max(.04,Math.min(1,.14+.70*Math.sin(Math.PI*phase))),timbre=.18+.55*phase,frequency=Number(row.targetFrequencyHz)*centsToRatio(bend);samples.push({t,frequency,breath:pressure,timbre,degreeKey:row.degreeKey,bend,channel:3,note:Number(row.midiNote||69),velocity:104,gate:true});if(i===0)appendPhraseEvidenceEvent([0x92,Number(row.midiNote||69),104],{t:t-.5,source:'aperture-simulation',simulated:true});const bend14=Math.max(0,Math.min(16383,Math.round(8192+(bend/(bendRange*100))*8192)));appendPhraseEvidenceEvent([0xE2,bend14&0x7f,(bend14>>7)&0x7f],{t,source:'aperture-simulation',simulated:true});appendPhraseEvidenceEvent([0xD2,Math.round(pressure*127)],{t:t+.05,source:'aperture-simulation',simulated:true});appendPhraseEvidenceEvent([0xB2,74,Math.round(timbre*127)],{t:t+.1,source:'aperture-simulation',simulated:true});if(i===131)appendPhraseEvidenceEvent([0x82,Number(row.midiNote||69),64],{t:t+.2,source:'aperture-simulation',simulated:true});} state.phraseShape.samples=samples; drawPhraseOverlay(); return structuredCloneSafe({forms:resolveApertureNarrative(samples),events:state.phraseShape.events,layers:phraseLayerState(),strata:phraseScaleStrata()}); },
+  simulateAperturePhrase: () => { const rows=state.mapping.filter(r=>!r.isPeriodClosure); if(rows.length<3)return null; const now=performance.now(), seq=[0,1,2,2,2,1,0,1,2,1,0], samples=[];state.phraseShape.events=[];state.phraseShape.eventSeq=0;const bendRange=Math.max(2,Number(effectiveIncomingBendRange().semitones)||48);for(let i=0;i<132;i+=1){const phase=i/131,idx=seq[Math.min(seq.length-1,Math.floor(phase*seq.length))]%rows.length,row=rows[idx],t=now-14800+i*(14800/131),bend=11*Math.sin(i*.58)+(i>55&&i<86?9*Math.sin(i*1.2):0),pressure=Math.max(.04,Math.min(1,.14+.70*Math.sin(Math.PI*phase))),timbre=.18+.55*phase,soundingCenterCents=Number(row.performanceCents),livePitchCents=soundingCenterCents+bend,frequency=Number(row.targetFrequencyHz)*centsToRatio(bend);samples.push({t,frequency,visualFrequencyHz:frequency,soundingCenterCents,livePitchCents,breath:pressure,timbre,degreeKey:row.degreeKey,bend,channel:3,note:Number(row.midiNote||69),velocity:104,gate:true,source:'aperture-simulation'});if(i===0)appendPhraseEvidenceEvent([0x92,Number(row.midiNote||69),104],{t:t-.5,source:'aperture-simulation',simulated:true});const bend14=Math.max(0,Math.min(16383,Math.round(8192+(bend/(bendRange*100))*8192)));appendPhraseEvidenceEvent([0xE2,bend14&0x7f,(bend14>>7)&0x7f],{t,source:'aperture-simulation',simulated:true});appendPhraseEvidenceEvent([0xD2,Math.round(pressure*127)],{t:t+.05,source:'aperture-simulation',simulated:true});appendPhraseEvidenceEvent([0xB2,74,Math.round(timbre*127)],{t:t+.1,source:'aperture-simulation',simulated:true});if(i===131)appendPhraseEvidenceEvent([0x82,Number(row.midiNote||69),64],{t:t+.2,source:'aperture-simulation',simulated:true});} state.phraseShape.samples=samples; drawPhraseOverlay(); return structuredCloneSafe({forms:resolveApertureNarrative(samples),events:state.phraseShape.events,layers:phraseLayerState(),strata:phraseScaleStrata()}); },
   setPhraseLayers: (patch={}) => { const map={symbols:'showSymbols',narrative:'showSymbols',strata:'showStrata',degrees:'showStrata',deviation:'showDeviation'}; for(const [key,value] of Object.entries(patch)){if(map[key])state.phraseShape[map[key]]=Boolean(value);} renderPhraseLayerControls();drawPhraseOverlay();return phraseLayerState(); },
   useMpeLegato96Profile: () => { useMpeLegato96Profile(); return structuredCloneSafe({profile:controllerProfileSnapshot(),effectiveBend:effectiveIncomingBendRange()}); },
   getEffectiveIncomingBendRange: () => structuredCloneSafe(effectiveIncomingBendRange()),
