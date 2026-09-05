@@ -1,30 +1,15 @@
-WARBL Scala Fingering Laboratory v1.1.0 — Release Verification
-Date: 2026-09-05
-
 PASS  APP_VERSION v1.1.0
-PASS  BUILD_CLASS stable public release
+PASS  stable BUILD_CLASS
+PASS  no dev version marker
 PASS  public status banner says stable public release
-PASS  no developer-repository/test identity in visible Lab text
-PASS  Latency & Wake Probe starts collapsed and uses public label
-PASS  index.html byte-identical to WARBL_Scala_Fingering_Lab_v1_1.html
+PASS  no developer-repository identity in promoted HTML
+PASS  G3.2 scheduler retained
+PASS  Space slider reaches 100%
+PASS  Space runtime clamps at 1.0
+PASS  v1.1 in-app repair note
+PASS  index byte-identical
+PASS  no duplicate element ids
+PASS  manifest v1.1.0
+PASS  README documents legato fix
+PASS  README documents Space 100
 PASS  inline JavaScript syntax (node --check)
-PASS  no duplicate element IDs
-PASS  protected G3.2 musical/runtime core exact-source invariant
-PASS  G3.2 audio-clock scheduler exact-source invariant
-PASS  supplied 57-pitch reference Scala visual centers: 57/57, max error 0 px
-PASS  valid applied 0-cent expression remains 0 cents
-PASS  tonic/second trace regression: Physical=2, Mapped=2, Sounding=tonic keeps primary visual identity on tonic
-PASS  Phrase Shape live pitch = sounding Scala center + applied expressive deviation
-PASS  Mapping Studio primary highlight follows sounding degree
-PASS  Notation Preview primary highlight follows sounding degree
-PASS  Pitch Geometry primary/central identity follows sounding degree
-PASS  Listening Space 0–100% behavior inherited unchanged
-PASS  optional WARBL2 reference preset included with provenance README
-
-Release HTML SHA-256: fb4997987db7ef0d1d0cdd8509bc4c8b813b1653fba53f366e3cdbfea357faa6
-WARBL2 reference preset SHA-256: 879edef0640c9a16be4622bd79b7a5e714a5bbf34e83beddc8527a89181ef886
-
-Evidence classification:
-- Visual witness repair: SOFTWARE VERIFIED against trace-confirmed physical scenario.
-- Underlying observation that tonic could sound while degree-2 candidate was physically/mapped: USER OBSERVED + TRACE CONFIRMED.
-- Protected musical/runtime G3.2 path: unchanged by this repair.

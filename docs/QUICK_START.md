@@ -76,7 +76,7 @@ The default performer reference is **Harmonic Reed — Performer Reference**. Th
 
 Use **Test Reference Instrument — A4** if you need to confirm that browser audio is awake.
 
-The v1.1 internal WARBL2 performance path preserves the accepted Harmonic Reed low-breath response, G3.2 finger commitment, and rapid-alternation assistance.
+The v1.1 internal WARBL2 performance path preserves the accepted Harmonic Reed/P0.3 low-breath response, RC5.10 geometric finger continuity, and RC5.11 recurrent-edge trill assistance.
 
 ## 6. Connect WARBL2 — Live WARBL monitor
 
@@ -94,7 +94,7 @@ The important v1.1 rule is simple:
 
 **A decisive fingering chooses the Scala destination; continuous physical expression shapes the path to it.**
 
-G3.2 finger commitment keeps physical fingering, mapped candidate, and sounding ownership distinct during a transition. When a note is sounding, the primary visual identity follows the sounding degree until musical ownership transfers; physical and mapped candidates remain visible as witnesses.
+RC5.10 geometric continuity removes the old fixed-cent commitment rule. When raw fingering changes, the currently audible pitch is preserved at the instant of the change and physical bend travel pays the remaining distance to the exact destination. When the destination is reached, the degree centers exactly.
 
 For rapid repeated A↔B motion, the Lab can recognize a recurrent physical edge and use **rapid-alternation / trill assistance** so a trill can reach exact mapped centers instead of repeatedly being trapped in unfinished geometric debt.
 
@@ -165,7 +165,3 @@ Update checks are manual through **Check GitHub for update**. The Lab never sile
 ---
 
 **Release boundary:** v1.1's core internal WARBL2 performance behavior is supported by the recorded multi-tuning physical trace and the promotion simulation gate. Advanced yaw/button tuning navigation remains opt-in and separately scoped for physical profile testing; external synth/DAW behavior remains receiver-dependent.
-
-## WARBL2 reference preset
-
-An optional reference controller preset is included at `../profiles/WARBL2/WARBL_SFL_reference_preset.warbl`. Save your own WARBL configuration before importing it. The Lab never loads this file automatically.

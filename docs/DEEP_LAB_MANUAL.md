@@ -6,6 +6,7 @@
 
 
 > **v1.1 update:** sustained-legato degree ownership now uses the G3.2 Finger Commitment Envelope with a conservative internal-reference 24→32 ms Web Audio-clock arrival; Listening Space range is 0–100%. Historical v1.0 sections below are retained where they document the prior release and its evidence.
+**Developer line:** maintained separately from the public v1.1 artifact; developer builds are not part of the public release package.  
 **Audience:** advanced performers, instrument builders, tuning researchers, developers, testers, and anyone who needs to understand why the Laboratory behaves as it does.
 
 ## 1. Deep Laboratory: what changes and what does not
@@ -148,7 +149,7 @@ The default rule shown in the UI is important:
 
 Use **Capture current WARBL fingering** to capture an observed eight-sensor state and assign it to a selected degree. This is an explicit authoring operation; it does not require the performer to type binary data.
 
-## 9. Historical v1.0 geometric-continuity lineage
+## 9. RC5.10 Geometric Finger Continuity — v1.0 pitch law
 
 The protected geometric law is the center of the current physical feel.
 
@@ -165,7 +166,7 @@ There is **no fixed-cent commitment threshold**.
 
 The local expression radius is tuning-aware and prefers physically reachable one-hole neighbors rather than blindly using the nearest degree anywhere in a dense scale.
 
-## 10. Rapid alternation / trill assistance
+## 10. RC5.11 recurrent-edge rapid alternation / trill assistance
 
 A single fast transition is not automatically a trill. The Lab looks for recurrence on the same physical edge together with repeated unfinished geometric debt.
 
@@ -357,7 +358,7 @@ The export system preserves source tuning and derived realization as separate co
 
 ## 24. Installed build
 
-The **Installed build** area is the in-application public summary. In v1.1 it identifies the release and explains the Performance Witness boundary without exposing the internal recovery ledger. Historical engineering provenance remains in the project audit rather than the performer-facing interface.
+The **Installed build** area is the in-application provenance/acceptance summary. In public v1.0 it identifies the v1.0.0 executable, recovery lineage, cumulative realtime repairs, geometric/trill/profile-safe-yaw promotion history, and the current acceptance boundary. Use this section when comparing a user's report against an older RC or developer build.
 
 ## 25. Support and updates
 
@@ -365,7 +366,7 @@ Public support is routed through GitHub Issues. The Lab pre-fills version, activ
 
 The update checker reads `updates/latest.json` from the public repository. It does not silently install or replace the HTML.
 
-## 26. Historical v1.0 release evidence
+## 26. v1.0 release evidence
 
 The promotion gate checks the actual generated release/dev HTML, not only a model of the logic.
 
@@ -396,7 +397,7 @@ That trace contains:
 
 The same trace recorded main-thread/UI stalls, including a multi-second outlier. Every retained lag/long-task event occurred while no note was sounding, so this remains a documented performance warning rather than a pitch-law failure.
 
-## 27. Historical development artifact
+## 27. v1.0-dev developer build
 
 `WARBL_Scala_Fingering_Lab_v1_0_DEV.html` begins with the same promoted musical/runtime core as v1.0. It exists so subsequent developer changes can be made without silently modifying the public release artifact.
 
@@ -419,20 +420,3 @@ v1.0 deliberately does not claim:
 - that a continuous IMU/pressure/bend stream has one universal musical meaning.
 
 Those boundaries are part of the Laboratory's reliability model, not omissions to hide.
-
-## 28. v1.1 Performance Witness model
-
-The live visual layer is deliberately one-way: `performance state → witness snapshot → views`. It cannot choose a degree, alter G3.2 commitment, retune MIDI, or change the Reference Instrument.
-
-The witness snapshot separates:
-
-- **Physical degree** — current raw WARBL topology.
-- **Mapped degree** — Scala candidate mapped from that topology.
-- **Sounding degree** — current musical carrier owner.
-- **Sounding center cents** — imported Scala center for the sounding degree.
-- **Applied expression cents** — continuous local expressive deviation.
-- **Live pitch cents** — sounding center + applied expression.
-
-A physical trace on 2026-09-05 demonstrated why this separation matters: during tonic→second-degree candidate transitions, physical/mapped could become degree 2 while sounding remained tonic for the bounded G3.2 transition interval. v1.1 therefore requires every primary musical highlight to follow Sounding while Physical and Mapped remain secondary witnesses.
-
-The optional reference controller preset is documented in `profiles/WARBL2/README.md`. It is configuration evidence only; actual hardware behavior remains trace evidence.
